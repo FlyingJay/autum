@@ -1,0 +1,36 @@
+
+
+ion-item {
+  border-bottom: 1px solid
+    var(--ion-item-border-color, var(--ion-border-color, var(--ion-color-step-150, rgba(0, 0, 0, 0.13))));
+  --inner-border-width: 0 0 0 0;
+  // --inner-padding-end: 0;
+  //   --padding-start: 0;
+}
+
+ion-item.paragraphItem {
+  --background: var(--ion-color-light);
+
+  h3 {
+    font-weight: normal;
+    letter-spacing: 1px;
+    font-size: 12px;
+  }
+}
+
+ion-text {
+  color: rgba(66, 66, 66, 0.8392156862745098);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+ion-content {
+  --background: var(--ion-color-light);
+}
+
+.specialPara {
+  font-size: 13px;
+}
+ion-list {
+  background: transparent;
+}

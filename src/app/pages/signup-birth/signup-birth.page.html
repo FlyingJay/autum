@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+      <ion-title class="ion-text-uppercase">Sign up</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content-background-color">
+  <form [formGroup]="signupForm" (ngSubmit)="validateAndContinue()" class="ion-padding">
+    <div class="privacy ion-padding-bottom">
+      <p style="font-size:30px" class= "dark ion-text-start">I was born on</p>
+        <ion-item class="item-background-color">
+          <ion-label style="font-size:20px" position="floating">MM/DD/YYYY</ion-label>
+          <ion-datetime formControlName="birthdate" displayFormat="MM/DD/YYYY" min="1980-03-14" max="2003-12-31"></ion-datetime>
+        </ion-item>
+      <p style="font-size:12px"class="medium ion-text-center">Your age will be publicly visible to others. Your age cannot be changed once set.</p>
+    </div>
+    <div class="buttonsDiv">
+      <ion-button expand="round" type="submit" color="dark">Next
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

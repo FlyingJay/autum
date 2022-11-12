@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Experiences</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-searchbar *ngIf="this.experiences.length<6"
+        [(ngModel)]="searchText"
+        (ionFocus)="addFocus()"
+        (ionInput)="search()"
+        (ionBlur)="removeFocus()"
+        placeholder="Your life experiences?"
+        inputmode="search"
+        animated="true"
+        debounce=100>
+    </ion-searchbar>
+    <!--
+    <ion-list>
+      <ion-item *ngFor="let experience of searchSuggestions" button (click)="add(experience)">
+        {{experience.name}}
+      </ion-item>
+    </ion-list>
+    -->
+    <div *ngIf="this.experiences.length<6">
+      <ion-chip outline (click)="add(experience)" *ngFor="let experience of searchSuggestions" color="#fff" class="ion-chip">
+        {{ experience.name }}
+      </ion-chip>
+    </div>
+  <div style="border-top:1px solid #DDD;"></div>
+  <ion-list style="padding-top:10px;margin-top:10px;">
+    <ion-chip outline (click)="remove(profileExperience)" *ngFor="let profileExperience of experiences"  color="#fff" class="ion-chip" >
+      <ion-label>
+        {{ profileExperience.experience.name }}
+        <ion-icon name="close-outline" color="#fff"></ion-icon>
+      </ion-label>
+    </ion-chip>
+  </ion-list>
+
+  <div *ngIf="this.experiences?.length>=6" class="center-image2" style="padding:5px 10px;">
+    <ion-text>You’ve reached your limit for experiences. Don’t worry, you can make changes or remove them at any time.</ion-text>
+  </div>
+</ion-content>

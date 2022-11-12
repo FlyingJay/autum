@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-capitalize">phone number settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="label_Class">
+    <h5>Enter your number</h5>
+  </div>
+
+  <ion-row>
+    <ion-col size="4">
+      <ion-item mode="md">
+        <ion-select [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="IN+91"
+                    [(ngModel)]="selectedValue" mode="ios">
+          <ion-select-option *ngFor="let item of data" value={{item.dial_code}} selected>{{item.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+    <ion-col size="8">
+      <ion-item class="inputItem" mode="md">
+        <div color="medium" class="inputDiv">
+          <ion-text slot="start">{{selectedValue}}</ion-text>
+          <ion-input type="tel" maxlength="10" class="item_input" [(ngModel)]="inputValue" maxlength="10" clearInput>
+          </ion-input>
+        </div>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <div class="buttonsDiv">
+    <ion-button style="border-radius:20px"mode="md" expand="full" expand="round" color="dark" class="ion-margin-top" (click)="updatePhone()" [disabled]="inputValue == ''">
+      Update my phone number
+    </ion-button>
+  </div>
+</ion-content>
+

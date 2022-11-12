@@ -1,0 +1,26 @@
+<ion-content class="content-background-color ion-padding">
+  <div class="ion-padding-bottom">
+    <div class="ion-text-center">
+      <p style="font-size:30px" class="textBold">Enter code sent to</p>
+      <span style="font-size:20px" class="dark ion-text-start">{{phoneNumber}} </span>
+    </div>
+
+    <div class="divOuter marginTop">
+      <div class="divInner marginTop">
+        <ion-input required autofocus type="tel" [ngClass]="isAndroid ? 'inputBorderAndroid marginTop' : 'inputBorderiOS marginTop'" maxlength="4" [(ngModel)]="otpInput" (ionChange)="tryVerify($event)"></ion-input>
+      </div>
+    </div>
+  </div>
+
+  <div class="ion-padding ion-margin ion-text-center">
+    <ion-button style="margin-bottom:50px"  color="dark" expand="round" class="buttonsDiv" (click)="back()">Back</ion-button>
+    <div class="divMedium ion-text-center">
+      <p>If you made a mistake or did not get an SMS, please press back to re-enter your number.</p>
+    </div>
+
+    <div class="divMedium ion-text-center">
+      <p>Tap continue to accept Autum's <u>Terms, Data Policy, Cookie Use </u>and its <u>Privacy Policy.</u>
+    </div>
+  </div>
+
+</ion-content>

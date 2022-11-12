@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+      <ion-title class="ion-text-uppercase">Sign up</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content-background-color">
+
+  <div  class="ion-padding">
+    <div class="privacy ion-padding-bottom">
+      <p style="font-size:30px;text-align:center!important" class= "dark ion-text-start">Show me</p>
+        <div class="buttonsDiv">
+          <ion-button (click)="selectMen()" expand="round" type="submit" color="light">
+            Men&nbsp;
+            <ion-icon *ngIf="show_men && !show_women" name="checkmark-sharp" color="autum-purple"></ion-icon>
+          </ion-button>
+          <div style="height:20px"></div>
+          <ion-button (click)="selectWomen()" expand="round" type="submit" color="light">
+            Women&nbsp;
+            <ion-icon *ngIf="show_women && !show_men" name="checkmark-sharp" color="autum-purple"></ion-icon>
+          </ion-button>
+          <div style="height:20px"></div>
+          <ion-button (click)="selectEveryone()" expand="round" type="submit" color="light">
+            Everyone&nbsp;
+            <ion-icon *ngIf="show_women && show_men" name="checkmark-sharp" color="autum-purple"></ion-icon>
+          </ion-button>
+        </div>
+      <p style="font-size:12px"class="medium ion-text-center"></p>
+    </div>
+    <!--
+    <div class="buttonsDiv">
+      <ion-button (click)="verifyShowMe()" expand="round" type="submit" color="dark">Next
+      </ion-button>
+    </div>
+    -->
+  </div>
+</ion-content>

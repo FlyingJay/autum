@@ -1,0 +1,15 @@
+{
+  "name": "autum",
+  "integrations": {
+    "cordova": {},
+    "enterprise": {
+      "keyId": 8285,
+      "productKey": "key_f5f194f850464bdba264748325bea793",
+      "appId": "cfad60a1",
+      "registries": [
+        "@ionic-enterprise;https://registry.ionicframework.com/"
+      ]
+    }
+  },
+  "type": "angular"
+}

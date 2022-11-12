@@ -1,0 +1,7 @@
+<div class="MessageList" #scrollMe>
+    <app-message-item
+      *ngFor="let msg of messages; trackBy: messageId; let i = index;"
+      [msg]="msg"
+      [previousMsg]="i > 0 ? messages[i-1] : null"
+    ></app-message-item>
+</div>

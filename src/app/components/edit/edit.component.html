@@ -1,0 +1,171 @@
+
+<div *ngIf="isLoading" class="nodataDiv ion-padding">
+  <ion-thumbnail slot="start" class="ovalIcon">
+    <img ng-cloak src="assets/images/logo.svg">
+  </ion-thumbnail>
+  <ion-spinner name="dots"></ion-spinner>
+  <ion-text class="dark ion-text-center" color="dark" style="font-size:24px;font-family:AutumFont-light;font-weight:bolder;">
+    Getting your profile..
+  </ion-text>
+</div>
+
+<div class="fadeIn" style="opacity:{{isLoading ? 0 : 1}}; position:fixed;width:100%;text-align:center;padding:20px 0;background:#FFF;z-index:9999999;" (click)="gotoProfilePreviewPage()">
+  <ion-label class="ion-text" value="view" style="color:#bd8daa;">Tap here to preview profile</ion-label>
+</div>
+<div class="fadeIn" style="opacity:{{isLoading ? 0 : 1}}" style="padding-top:10px;margin-inline:12px;">
+  <br/><br/>
+  <ktd-grid style="margin-top:17px"
+    [cols]="cols"
+    [rowHeight]="rowHeight"
+    [layout]="layout"
+    compactType="horizontal"
+    (layoutUpdated)="onLayoutUpdated($event)"
+    (dragStarted)="onDragStarted()">
+
+    <ktd-grid-item resizable="false" [draggable]="pictures[i]" *ngFor="let item of layout; trackBy:trackById; index as i" [id]="item.id">
+      <ion-card  class="ion-card-grid" [ngClass]="{'cardBorder': !pictures[i]}">
+        <div *ngIf="pictures[i]" class="imageDiv" style="background:url('{{ pictures[i].picture }}');background-size:cover;">
+        </div>
+        <div *ngIf="pictures[i] && pictures?.length > 1" (click)="deletePicture(i)" class="closeIcon">
+          <ion-icon style="color:#f112b;" name="close" expand="icon-only"></ion-icon>
+        </div>
+        <div *ngIf="!pictures[i]" class="addIcon shinytext" (click)="uploader.click()">
+          <ion-icon name="add" expand="icon-only"></ion-icon>
+        </div>
+        <div *ngIf="!pictures[i] && isUploading || isDeleting[i]" class="loadIcon">
+          <ion-spinner name="crescent" ></ion-spinner>
+        </div>
+        <input #uploader type="file" accept="heif,image/*"  (change)="fileChangeEvent($event, i)" style="display:none;"/>
+      </ion-card>
+    </ktd-grid-item>
+  </ktd-grid>
+</div>
+
+<ion-list lines="none" class="fadeIn" style="opacity:{{isLoading ? 0 : 1}}">
+  <ion-list-header>
+    <h6 style="font-size:14px!important">Bio</h6>
+  </ion-list-header>
+  <ion-card class=ion-card-input>
+    <ion-item lines="none">
+      <ion-textarea auto-grow rows="1" style="font-size:12px!important;" (ionChange)="updateBio()" [(ngModel)]="bio" placeholder="Write something cool about yourself..." type="text"></ion-textarea>
+    </ion-item>
+  </ion-card>
+
+  <ion-list-header>
+      <h6 style="font-size:14px!important">Interests</h6>
+  </ion-list-header>
+  <ion-card *ngIf="interests?.length == 0" (click)="goToPage('select-interest')" class=ion-card-input>
+    <ion-item lines="none">
+      <ion-input style="font-size:12px!important" (click)="goToPage('select-interest')" placeholder="Add your interests" type="text"> </ion-input>
+    </ion-item>
+  </ion-card>
+  <ion-card *ngIf="interests?.length > 0" style="padding:5px" (click)="goToPage('select-interest')"  class=ion-card-input>
+    <app-interest-list [interests]="interests" (onTagClicked)="goToPage('select-interest')"></app-interest-list>
+  </ion-card>
+  <!--
+  <ion-list-header>
+    <h6 style="font-size:14px!important">Experiences</h6>
+  </ion-list-header>
+  <ion-card *ngIf="experiences?.length == 0" (click)="goToPage('select-experience')" class=ion-card-input>
+    <ion-item lines="none">
+      <ion-input style="font-size:14px!important" *ngIf="experiences?.length == 0" placeholder="Add your Experiences" type="text"> </ion-input>
+    </ion-item>
+  </ion-card>
+  <ion-card style="padding:5px" *ngIf="experiences?.length > 0" (click)="goToPage('select-experience')" class=ion-card-input>
+    <app-experience-list [experiences]="experiences" (onTagClicked)="goToPage('select-experience')"></app-experience-list>
+  </ion-card>
+  -->
+  <ion-list-header>
+    <h6 style="font-size:14px!important">School</h6>
+  </ion-list-header>
+  <ion-card class=ion-card-input>
+    <ion-item lines="none">
+      <ion-label  (click)="goToPage('select-school')">
+        <ion-badge color="#ffff" style="margin-right:5px;font-weight:200;padding:4px 8px;">
+          {{ school }}
+        </ion-badge>
+      </ion-label>
+      <ion-icon style="font-size:14px"(click)="goToPage('select-school')" slot="end" color="dark" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+  </ion-card>
+
+  <ion-list-header>
+    <h6 style="font-size:14px!important">Job Title</h6>
+  </ion-list-header>
+  <ion-card class=ion-card-input>
+    <ion-item lines="none">
+      <ion-input style="font-size:14px!important"  (ionChange)="updateJob()" [(ngModel)]="job" placeholder="Your current job..." type="text"></ion-input>
+    </ion-item>
+  </ion-card>
+
+<!-- Enable in Future
+  <ion-list-header>
+    <h6 style="font-size:14px!important">Company</h6>
+  </ion-list-header>
+  <ion-card class=ion-card-input>
+    <ion-item lines="none">
+      <ion-input style="font-size:14px!important" (ionChange)="updateCompany()" [(ngModel)]="company" placeholder="What's the name of your company..." type="text"></ion-input>
+    </ion-item>
+  </ion-card>
+-->
+
+  <ion-list-header>
+    <h6 style="font-size:14px!important">Profile Colour</h6>
+  </ion-list-header>
+  <ion-card class=ion-card-input style="padding:10px;">
+    <app-scroll-horizontal>
+      <div *ngFor="let key of objectKeys(gradients)" (click)="updateGradient(key)" style="display:inline-block;height:30px;width:30px;border-radius:100px;background:{{gradients[key]}};margin-right:10px;position:relative;border:1px solid #DDD;">
+        <div style="line-height:80px;text-align:center;font-family:'AutumFont-light';color:#37393E;">
+
+        </div>
+        <span *ngIf="gradient == key" style="position:absolute;top:7px;right:7px;">
+          <ion-icon name="checkmark-circle" style="color:#autum-black"></ion-icon>
+        </span>
+      </div>
+    </app-scroll-horizontal>
+  </ion-card>
+
+  <ion-list-header>
+    <h6 style="font-size:14px!important"> I Identify As </h6>
+  </ion-list-header>
+  <ion-card class=ion-card-input>
+    <ion-item>
+      <ion-label (click)="goToPage('show-me-iam')">
+        <h6>{{ user?.gender?.name || 'Add info..' }}</h6>
+      </ion-label>
+      <ion-icon style="font-size:14px" slot="end" color="dark" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+  </ion-card>
+
+  <ion-list-header>
+    <h6 style="font-size:14px!important">Sexual Orientation</h6>
+  </ion-list-header>
+  <ion-card class=ion-card-input>
+    <ion-item>
+      <ion-label (click)="goToPage('show-me-sexual-orientation')">
+        <h6 *ngIf="orientation == 0">Heterosexual</h6>
+        <h6 *ngIf="orientation == 1">Gay</h6>
+        <h6 *ngIf="orientation == 2">Lesbian</h6>
+        <h6 *ngIf="orientation == 3">Bisexual</h6>
+        <h6 *ngIf="orientation == 4">Asexual</h6>
+        <h6 *ngIf="orientation == 5">Demisexual</h6>
+        <h6 *ngIf="orientation == 6">Pansexual</h6>
+        <h6 *ngIf="orientation == 7">Queer</h6>
+        <h6 *ngIf="orientation == 8">Questioning</h6>
+        <h6 *ngIf="!orientation && orientation != 0">Add info..</h6>
+      </ion-label>
+      <ion-icon style="font-size:14px" slot="end" color="dark" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+  </ion-card>
+
+  <ion-list-header>
+    <h6 style="font-size:14px!important">Height</h6>
+  </ion-list-header>
+  <ion-card class=ion-card-input>
+    <ion-item lines="none">
+      <ion-input style="font-size:14px!important" mode="ios" readonly (click)="showPicker()" expand="block" value="{{heights[heights_inches.indexOf(height)]}}"></ion-input>
+    </ion-item>
+  </ion-card>
+
+  <br/>
+</ion-list>

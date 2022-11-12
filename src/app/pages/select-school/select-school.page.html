@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+    </ion-buttons>
+    <ion-title>School</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-searchbar
+            [(ngModel)]="searchText"
+            (ionFocus)="addFocus()"
+            (ionInput)="search()"
+            (ionBlur)="removeFocus()"
+            placeholder="Where have you studied?"
+            inputmode="search"
+            animated="true"
+            debounce=100
+            style="margin-bottom:10px;">
+    </ion-searchbar>
+
+    <div style="padding:5px 10px;">
+      <ion-chip outline (click)="add(result)" *ngFor="let result of searchSuggestions" color="#fff" class="ion-chip">
+        {{ result?.name }}
+      </ion-chip>
+    </div>
+  </ion-list>
+
+  <ion-list style="height:100%;text-align:center;">
+    <ion-chip *ngIf="school" outline (click)="remove()" color="#000" class="ion-chip">
+      <ion-label>
+        {{ school?.name }}&nbsp;
+        <ion-icon name="close-outline" color="autum-red"></ion-icon>
+      </ion-label>
+    </ion-chip>
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+      <ion-title class="ion-text-uppercase">Sign up</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content-background-color">
+
+  <div  class="ion-padding">
+    <div class="privacy ion-padding-bottom">
+      <p style="font-size:30px;text-align:center!important" class= "dark ion-text-start">I identify as</p>
+      <p style="font-size:12px"class="medium ion-text-center">This information will <b>not</b> be visible to others.</p>
+        <div class="buttonsDiv">
+          <ion-button (click)="selectMale()" expand="round" type="submit" color="light">
+            Male&nbsp;
+            <ion-icon *ngIf="gender?.name == 'Male'" name="checkmark-sharp" color="autum-purple"></ion-icon>
+          </ion-button>
+          <div style="height:20px"></div>
+          <ion-button (click)="selectFemale()" expand="round" type="submit" color="light">
+            Female&nbsp;
+            <ion-icon *ngIf="gender?.name == 'Female'" name="checkmark-sharp" color="autum-purple"></ion-icon>
+          </ion-button>
+          <div style="height:20px"></div>
+          <ion-button (click)="goToGenderSelect()"  expand="round" type="submit" color="light">
+            More&nbsp;
+            <ion-icon *ngIf="gender && gender?.name != 'Male' && gender?.name != 'Female'" name="checkmark-sharp" color="autum-purple"></ion-icon>
+          </ion-button>
+        </div>
+      <p style="font-size:12px"class="medium ion-text-center"></p>
+    </div>
+    <div *ngIf="gender" class="buttonsDiv">
+      <ion-button (click)="goToSexualOrientation()" expand="round" type="submit" color="dark">
+        Next
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

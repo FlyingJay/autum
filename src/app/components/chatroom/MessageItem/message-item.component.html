@@ -1,0 +1,52 @@
+<div
+  class="{{ msg.type }} MessageItem"
+  [style.margin-top]="isFirstInGroup && !showGroupTimestamp ? '20px' : '0px'"
+  [ngClass]="{'self': msg.userId === currentUserId}"
+>
+    <!--
+    <app-image
+      *ngIf="msg.user.avatarFileId"
+      [fileId]="msg.user.avatarFileId"
+    ></app-image>
+    -->
+<!--
+  <div class="Avatar">
+    <ion-avatar style="margin:0 auto;">
+      <ion-img [src]="otherUser.profile_picture_url"></ion-img>
+    </ion-avatar>
+  </div>
+-->
+
+<!--
+  <div class="DisplayName">
+ {{ otherUser.first_name }}
+    &lt;!&ndash; {{msg.user.displayName ?? msg.user.userId ?? msg.userId}} &ndash;&gt;
+  </div>
+-->
+    <div class="Timestamp" *ngIf="isFirstInGroup && showGroupTimestamp">
+        {{ timeStringLonger }}
+    </div>
+
+    <div class="Content" (click)="toggleShowTimestamp()">
+        <template #content> </template>
+    </div>
+
+    <div class="Metadata" *ngIf="showTimestamp">
+        <em>{{timeString}}</em>
+    </div>
+
+ <!-- <div class="Metadata">
+    <app-reaction-picker
+      [messageId]="msg.messageId"
+      [myReactions]="msg.myReactions"
+    ></app-reaction-picker>
+    {{" • "}}
+    <em>{{timeString}}</em>
+    <app-sync-state [value]="msg.syncState"></app-sync-state>
+    <app-reaction-bar
+      *ngIf="!!msg.reactionsCount"
+      [reactionsCount]="msg.reactionsCount"
+      [reactions]="msg.reactions"
+    ></app-reaction-bar>
+  </div>-->
+</div>

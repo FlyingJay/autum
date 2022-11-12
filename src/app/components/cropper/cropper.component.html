@@ -1,0 +1,21 @@
+<ion-content>
+  <div class="content" (click)='closeModal()'>
+    <div style="display:{{ isLoaded ? 'block' : 'none' }};">
+      <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="69/121"
+          [imageQuality]="60"
+          [autoCrop]="true"
+          format="jpeg"
+          [resizeToWidth]="640"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+      ></image-cropper>
+
+      <h3>Tap here to save..</h3>
+    </div>
+  </div>
+</ion-content>

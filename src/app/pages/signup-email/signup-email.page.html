@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-title class="ion-text-uppercase">Sign up</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content-background-color" >
+  <form [formGroup]="signupForm" (ngSubmit)="validateAndContinue()" class="ion-padding">
+    <div class="privacy ion-padding-bottom">
+      <p style="font-size:30px" class="dark ion-text-start">What's your email?</p>
+        <ion-item style="border-radius:20px" >
+          <ion-input formControlName="email" style="font-size:20px" class="marginTop" required="true" autofocus="true" inputmode="email" autocomplete="email" type="email" placeholder="Enter email"></ion-input>
+
+        </ion-item>
+    </div>
+    <div class="buttonsDiv">
+      <ion-button expand="round" type="submit" color="dark">
+        Next
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

@@ -1,0 +1,64 @@
+
+ion-list {
+  background: var(--ion-color-light-tint);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+ion-content {
+  --background: var(--ion-color-warning-contrast);
+}
+
+ion-card {
+  width: 100%;
+  padding: 0;
+  margin: 0 0 11px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+ion-item.noborderBottom {
+  --inner-border-width: 0 0 0 0 !important;
+}
+
+ion-item {
+  --inner-border-width: 0 0 0 0 !important;
+
+  // --inner-padding-end: 0;
+}
+
+ion-avatar {
+  width: 75px;
+  height: 75px;
+}
+
+h2 {
+  font-family: sans-serif;
+  font-weight: 600;
+  color: #383a3ecc;
+}
+
+p {
+  font-weight: 500;
+  //   font-family: serif;
+  color: var(--ion-color-medium);
+}
+
+ion-toggle {
+  --handle-background: var(--ion-color-light);
+}
+
+ion-button.headerButton {
+  width: 135px;
+  font-size: 12px;
+}
+.ios ion-button.headerButton {
+  font-size: 12px;
+  width: auto;
+  --padding-start: 10px;
+  --padding-end: 10px;
+}
+.title-ios {
+  width: 80%;
+  text-align: center !important;
+}

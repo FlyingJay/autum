@@ -1,0 +1,108 @@
+<ion-header style="background:transparent">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon slot="end" name="arrow-back-outline" color="autum-black" (click)="closeModal()">
+      </ion-icon>
+    </ion-buttons>
+    <ion-title color="autum-black" class="ion-text-center">
+   {{likeOther(like)?.first_name | titlecase}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-icon class="heart-dislike"style="color:#f11f2b" slot="end" name="heart-dislike" (click)="popoverOpen($event)">
+      </ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #IonContent style="background:{{gradients[likeOther(like)?.gradient] || gradients['Neutral']}}!important;">
+  <ion-list style="padding:20px 10px;background:transparent;">
+    <div *ngFor="let chat of msgList; let i = index;" style="background:transparent;">
+      <ion-row *ngIf="chat.userId == User">
+        <ion-col size="2">
+          <div class="chatLeftAvatarImage" [ngClass]="(msgList[i+1] && msgList[i+1].userId === chat.userId)?'hidden':''">
+            <ion-avatar class="ChatproifilePic">
+              <ion-img [src]="chat.userAvatar"></ion-img>
+            </ion-avatar>
+          </div>
+        </ion-col>
+        <ion-col class="right ion-no-padding" [ngClass]="{'clubbed':((msgList[i+1] && msgList[i+1].userId != chat.userId)|| !msgList[i+1])}" size="10">
+          <div class="imageAvatarRight">
+            <ion-label color="light">
+              <div class="chatDiv" [ngClass]="{'sharper':((msgList[i+1] && msgList[i+1].userId === chat.userId) &&
+                      (msgList[i-1] && msgList[i-1].userId === chat.userId)),
+                      'sharper-top':(msgList[i-1] && msgList[i-1].userId === chat.userId),
+                      'sharper-bottom':(msgList[i+1] && msgList[i+1].userId === chat.userId)}">
+                <p class="ion-text-wrap ion-padding">{{chat.message}}
+                </p>
+              </div>
+              <div class="timedivRight" *ngIf="((msgList[i+1] && msgList[i+1].userId != chat.userId)|| !msgList[i+1])">
+                <ion-text class="footer-text-size">{{chat.time}}</ion-text>
+              </div>
+            </ion-label>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="chat.userId == toUser" class="ion-align-item-center">
+        <ion-col class="left ion-no-padding" [ngClass]="{'clubbed':((msgList[i+1] && msgList[i+1].userId != chat.userId)|| !msgList[i+1])}" size="10">
+          <div class="imageAvatarLeft">
+            <ion-label color="light">
+              <div style="background:#BD8DAA;" class="chatDiv" [ngClass]="{'sharper':((msgList[i+1] && msgList[i+1].userId === chat.userId) &&
+                      (msgList[i-1] && msgList[i-1].userId === chat.userId)),
+                      'sharper-top':(msgList[i-1] && msgList[i-1].userId === chat.userId),
+                      'sharper-bottom':(msgList[i+1] && msgList[i+1].userId === chat.userId)}">
+                <p class="ion-text-wrap ion-padding" *ngIf="!chat.image && !chat.video && !chat.map">{{chat.message}}
+                </p>
+              </div>
+              <div class="timediv" *ngIf="((msgList[i+1] && msgList[i+1].userId != chat.userId)|| !msgList[i+1])">
+                <ion-icon [name]="chat.status" color="rose"></ion-icon>
+                <ion-text color="rose" class="footer-text-size">{{chat.time}}</ion-text>
+              </div>
+            </ion-label>
+          </div>
+        </ion-col>
+        <ion-col size="2">
+          <div class="chatLeftAvatarImage" [ngClass]="(msgList[i+1] && msgList[i+1].userId === chat.userId)?'hidden':''">
+            <ion-avatar class="ChatproifilePic">
+              <ion-img [src]="chat.userAvatar"></ion-img>
+            </ion-avatar>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="((msgList[i+1] && msgList[i+1].userId != chat.userId)|| !msgList[i+1])">
+        <ion-col>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-list>
+  <ion-row *ngIf="loader" class="ion-padding-bottom">
+    <ion-col class="loading-col ion-no-padding">
+      <div class="imageAvatarRight">
+        <div class="imageAvatarBottomLoader">
+          <ion-avatar class="avatar">
+            <div class="imageAvatarBottomIcon">
+              <ion-icon name="add" color="light"> </ion-icon>
+            </div>
+            <ion-img src="assets/chat/chat5.jpg"></ion-img>
+          </ion-avatar>
+        </div>
+        <ion-label>
+          <div class="chatDivLoader">
+            <ion-spinner name="dots" color="light"></ion-spinner>
+          </div>
+        </ion-label>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-item class="footerItem">
+      <ion-input (ionFocus)="focusFunction($event)" [(ngModel)]="user_input" (keypress)="userTyping($event)" type="text"
+        placeholder="Type your message here..."></ion-input>
+      <ion-icon color="autum-purple" name="send" slot="end" (click)=" sendMsg()" (mousedown)="something($event)">
+      </ion-icon>
+      <ion-icon name="link" color="autum-black" slot="start" (click)="toggleList('show')">
+      </ion-icon>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

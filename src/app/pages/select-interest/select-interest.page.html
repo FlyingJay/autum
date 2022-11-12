@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Interests</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-searchbar *ngIf="this.interests.length<6"
+        [(ngModel)]="searchText"
+        (ionFocus)="addFocus()"
+        (ionInput)="search()"
+        (ionBlur)="removeFocus()"
+        placeholder="What do you do for fun?"
+        inputmode="search"
+        animated="true"
+        debounce=100d>
+
+    </ion-searchbar>
+    <!--
+    <ion-list>
+      <ion-item *ngFor="let interest of searchSuggestions" button (click)="add(interest)">
+        {{interest.name}}
+      </ion-item>
+    </ion-list>
+    -->
+    <div *ngIf="this.interests.length<6">
+      <ion-chip outline (click)="add(interest)" *ngFor="let interest of searchSuggestions" color="#fff" class="ion-chip">
+        {{ interest.name }}
+      </ion-chip>
+    </div>
+<div style="border-top:1px solid #DDD;"></div>
+  <ion-list *ngIf="interests?.length > 0" style="padding-top:10px;margin-top:10px;">
+    <ion-chip outline (click)="remove(profileInterest)" *ngFor="let profileInterest of interests" color="#fff" class="ion-chip">
+      <ion-label>
+        {{ profileInterest.interest.name }}
+        <ion-icon name="close-outline" color="#fff"></ion-icon>
+      </ion-label>
+    </ion-chip>
+  </ion-list>
+
+  <div *ngIf="this.interests?.length>=6" class="center-image2" style="padding:5px 10px;">
+    <ion-text>You’ve reached your limit for interests. Don’t worry, you can make changes or remove them at any time.</ion-text>
+  </div>
+</ion-content>
+

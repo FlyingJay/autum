@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+    </ion-buttons>
+    <ion-title>I am</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-searchbar
+        [(ngModel)]="searchText"
+        (ionFocus)="addFocus()"
+        (ionInput)="search()"
+        (ionBlur)="removeFocus()"
+        placeholder="What is your gender?"
+        inputmode="search"
+        animated="true"
+        debounce=100
+        style="margin-bottom:10px;">
+    </ion-searchbar>
+
+    <div style="padding:5px 10px;">
+      <ion-chip outline (click)="add(result)" *ngFor="let result of searchSuggestions" color="#fff" class="ion-chip">
+        {{ result?.name }}
+      </ion-chip>
+    </div>
+  </ion-list>
+  <div style="border-top:1px solid #DDD;"></div>
+  <ion-list style="padding-top:40px;height:100%;text-align:center;">
+    <ion-chip *ngIf="gender" outline color="#000" class="ion-chip">
+      <ion-label>
+        {{ gender?.name }}
+      </ion-label>
+    </ion-chip>
+  </ion-list>
+
+</ion-content>

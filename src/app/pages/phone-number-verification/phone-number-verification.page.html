@@ -1,0 +1,30 @@
+<ion-content class="content-background-color ion-padding">
+  <div class="ion-padding-bottom">
+    <div class="ion-text-center">
+      <p style="font-size:30px" class="textBold">Enter code sent to</p>
+      <span style="font-size:20px" class="dark ion-text-start">{{phoneNumber}} </span>
+    </div>
+
+    <div class="divOuter marginTop">
+      <div class="divInner marginTop">
+        <ion-input type="tel" class="inputBorder  marginTop" #otp1 maxlength="1" [(ngModel)]="otpInput1"
+                   (keyup)="next(otp2,'1')"></ion-input>
+        <ion-input type="tel" class="inputBorder marginTop" #otp2 maxlength="1" [(ngModel)]="otpInput2"
+                   (keyup)="next(otp3,'2')"></ion-input>
+        <ion-input type="tel" class="inputBorder marginTop" #otp3 maxlength="1" [(ngModel)]="otpInput3"
+                   (keyup)="next(otp4,'3')"></ion-input>
+        <ion-input type="tel" class="inputBorder marginTop" #otp4 maxlength="1" [(ngModel)]="otpInput4"></ion-input>
+      </div>
+    </div>
+  </div>
+
+  <div class="ion-padding ion-margin ion-text-center">
+    <ion-button style="margin-bottom:50px"  color="dark" expand="block" class="buttonsDiv" (click)="verify()">Continue
+    </ion-button >
+    <ion-text (click)="home()" color="dark">I didn't get a code</ion-text>
+  </div>
+  <div class="divMedium ion-text-center">
+    <p>Tap continue to accept Facebook's <u>Terms,data Policy,cookie use </u>and the <u>Privacy Policy</u> and <u>Terms
+      of service</u> of tinder.</p>
+  </div>
+</ion-content>

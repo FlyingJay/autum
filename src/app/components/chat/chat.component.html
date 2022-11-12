@@ -1,0 +1,61 @@
+
+<div *ngIf="isLoading" class="nodataDiv ion-padding">
+  <ion-thumbnail slot="start" class="ovalIcon">
+    <img src="assets/images/logo.svg">
+  </ion-thumbnail>
+  <ion-spinner name="dots"></ion-spinner>
+  <ion-text class="dark ion-text-center" color="dark" style="font-size:24px;font-family:AutumFont-light;font-weight:bolder;">
+    Getting your likes...
+  </ion-text>
+</div>
+
+<!--Card Page For Empty MATCHES-->
+<ion-slides ng-cloak *ngIf="!isLoading && matches && matches.length == 0" class="fadeIn" #Slides [options]="slideOpts" style="opacity:{{isLoading ? 0 : 1}}">
+  <ion-slide ng-cloak>
+    <ion-card ng-cloak class="matchCard">
+      <img ng-cloak class="ng-cloak center-image" src="assets/images/autum/blackTextRedLeaf.svg">
+      <br/>
+      <img ng-cloak style="margin-top:-100px;" class="ng-cloak center-image2" src='../../assets/images/heart.svg'>
+      <ion-header style="color:#37393E;margin-top:-50px"> Your likes will appear here! </ion-header>
+      <div style="margin-top:20px">
+          <ion-button (click)="goToToDeck()" style="font-weight:normal;text-transform:inherit;width:122px;margin-top:20px" shape=round color="autum-red"> Swipe!</ion-button>
+          <br><br>
+          <ion-button (click)="goToToEdit()" style="font-weight:normal;text-transform:inherit;width:122px" shape=round color="autum-red">  Edit Profile </ion-button>
+      </div>
+    </ion-card>
+  </ion-slide>
+
+  <!--Card Page For Location OUT OF BOUNDS-->
+  <ion-slide ng-cloak *ngIf="false">
+    <ion-card ng-cloak class=" ng-cloak matchCard">
+      <img ng-cloak class="center-image" src="assets/images/autum/blackTextRedLeaf.svg">
+      <br/>
+      <img ng-cloak style="margin-top:-100px;" class="ng-cloak center-image2" src='../../assets/images/heart.svg'>
+      <div class="center-flex fadeIn">
+        <ion-header class="center-flex" style="color:#37393E;margin-top:-50px;text-align:center">
+
+          <h6 ng-cloak>Hey {{this.user?.first_name | titlecase}}!</h6>
+          <h6 ng-cloak style="margin-inline:5px;">We're not available in your area yet. You're on the waiting list for Autum. We'll notify you once we launch in your area.</h6>
+
+        </ion-header>
+        <ion-button onclick="window.location.href='https://www.instagram.com/autumapp';" style="text-transform:inherit;font-weight:normal;margin-top:100px" shape=round color="autum-red">
+          Follow us on Instagram
+        </ion-button>
+      </div>
+    </ion-card>
+  </ion-slide>
+</ion-slides>
+
+<!--Card Page FOR POTENTIAL DATES-->
+<ion-slides ng-cloak *ngIf="matches && matches.length > 0" #Slides [options]="slideOpts" class="fade-in">
+  <ion-slide *ngFor="let like of matches;" (click)="Slides.stopAutoplay();">
+    <div ng-cloak app-profile-card
+         [profile]="likeOther(like)"
+         [user]="likeUser(like)"
+         [like]="like"
+         (onLikeEnded)="loadData()"
+         (onReportUser)="onReportUser($event)"
+         style="padding:10px;"
+         class="card"></div>
+  </ion-slide>
+</ion-slides>

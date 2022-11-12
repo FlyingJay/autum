@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Delete Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="!pageLoaded">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+  <ion-card>
+    <ion-row class="row_with_Border">
+      <ion-col size="12">
+        <div class="colFirst">
+          <h5>Let us know how we can make Autum a better community!</h5>
+          <p>We love hearing from our users.</p>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="!showOtherInput" >
+      <ion-col size="6" *ngFor="let item of deleteData; let i = index" class="ion-no-padding" (click)="goForModalReason(item)">
+        <div class="contentCenter">
+          <ion-icon color={{item.iconColor}} style="font-size:30px" name={{item.icon}}> </ion-icon>
+          <h6 class="marginCustom ion-text-uppercase text-center">{{item.head}}</h6>
+          <h6 class="ion-text-uppercase ion-text-center ion-no-margin">{{item.head1}}</h6>
+        </div>
+      </ion-col>
+      <ion-col size="12" class="ion-no-padding" (click)="goForModalReason(deleteOther)">
+        <div class="contentCenter">
+          <ion-icon color={{deleteOther.iconColor}} style="font-size:30px" name={{deleteOther.icon}}> </ion-icon>
+          <h6 class="marginCustom ion-text-uppercase text-center">{{deleteOther.head}}</h6>
+          <h6 class="ion-text-uppercase ion-text-center ion-no-margin">{{deleteOther.head1}}</h6>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="showOtherInput" >
+      <ion-col *ngIf="showOtherInput" size="12" class="ion-no-padding">
+        <div class="contentCenter">
+          <ion-textarea auto-grow rows="3" style="font-size:12px!important;border-radius:20px;border:1px solid #DDD;margin-bottom:20px;" [(ngModel)]="otherText" placeholder="Why are you leaving? Let us know!" type="text">
+
+          </ion-textarea>
+          <input type="button" (click)="submitOther()" value="Submit" style="font-weight:normal;padding:5px 20px;background-color:var(--ion-color-autum-red);color:#FFF;border-radius:20px;"/>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>

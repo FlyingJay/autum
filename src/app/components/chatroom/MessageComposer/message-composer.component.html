@@ -1,0 +1,66 @@
+<div class="MessageComposer">
+  <!--
+  <app-attachment
+    *ngIf="attachment"
+    [file]="attachment.model"
+    (onDelete)="resetFiles()"
+  ></app-attachment>
+  -->
+
+  <form [formGroup]="chatForm" (submit)="onSubmit()">
+    <div class="Uploaders">
+      <!--
+      <button type="button" (click)="imageInput.click()">
+        <icon-image-upload></icon-image-upload>
+        <input
+          #imageInput
+          style="display: none;"
+          type="file"
+          accept="image/*"
+          (change)="handleFileInput($event.target.files)"
+        />
+      </button>
+      <button type="button" (click)="fileInput.click()">
+        <icon-file-upload></icon-file-upload>
+        <input
+          #fileInput
+          style="display: none;"
+          type="file"
+          accept="*/*"
+          (change)="handleFileInput($event.target.files)"
+        />
+      </button>
+      -->
+      <ion-icon *ngIf="isRecording"
+                (click)="stopCapture()"
+                name="mic"
+                style="color:#f11f2b;font-size:35px;padding-left:10px;padding-bottom:7px"></ion-icon>
+      <ion-icon *ngIf="!isRecording"
+                (click)="startCapture()"
+                name="mic"
+                style="color:#000;font-size:35px;padding-left:10px;padding-bottom:7px"></ion-icon>
+    </div>
+    <span *ngIf="isRecording" style="padding-top:20px">Recording..</span>
+    <span *ngIf="attachment && !isRecording" style="padding-top:20px" (click)="resetFiles()">Recorded, tap here to delete.</span>
+    <ion-textarea class="test"
+                  #chatBox
+                  *ngIf="!attachment && !isRecording"
+                  type="text"
+                  rows="1"
+                  inputmode="text"
+                  enterkeyhint="enter"
+                  formControlName="message"
+                  placeholder="Type something..."
+                  autocomplete="off"
+                  autoCorrect="off"
+                  autoGrow="true"
+                  maxlength=1000
+                  style="--padding-bottom:0;--padding-end:0;"
+                  [ngClass]="isAndroid ? 'androidTextarea' : 'iosTextarea'"
+    ></ion-textarea>
+    <ion-button color="transparent" slot="end" size="default" (mousedown)="$event.preventDefault();" type="submit" style="padding-left:0;padding-right:2px;padding-top:3px">
+      <icon-send-record *ngIf="attachment && !isRecording"> </icon-send-record>
+      <icon-send  *ngIf="!attachment || isRecording"> </icon-send>
+    </ion-button>
+  </form>
+</div>

@@ -1,0 +1,20 @@
+<!--
+<a *ngIf="model" class="FileContent" [href]="model.fileUrl" download>
+  <icon-attachment></icon-attachment>
+  <strong>{{model.attributes.name}}</strong>
+  <span>{{prettyBytes(model.attributes.size)}}</span>
+</a>
+-->
+
+<div class="FileContent" [style.background]="background">
+  <ion-icon (click)="togglePlay($event)" *ngIf="!isPlaying" name="play-circle" style="font-size:32px"> </ion-icon>
+  <ion-icon (click)="togglePlay($event)" *ngIf="isPlaying" name="pause-circle" style="font-size:32px"> </ion-icon>
+  <div>
+  <strong>Voice Message</strong>
+    <br/>
+  <span *ngIf="currentTime > 0">{{ currentTimeStamp() }} / {{ durationStamp() }}</span>
+  <span *ngIf="currentTime == 0">{{ durationStamp() }}</span>
+  <!--<span>{{prettyBytes(model.attributes.size)}}</span>-->
+  </div>
+  <audio id="audio" src="{{model.fileUrl}}"></audio>
+</div>

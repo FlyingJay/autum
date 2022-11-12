@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+      <ion-title class="ion-text-uppercase"></ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content-background-color" >
+  <div class="ion-padding">
+    <div class="privacy ion-padding-bottom">
+      <p style="font-size:20px" class="dark ion-text-start ">My Sexual Orientation is</p>
+
+      <ion-list>
+        <ion-item (click)="selectOrientation(0)" class="item-background-color">
+          <ion-checkbox color="autum-salmon"name="Heterosexual" [checked]="orientation == 0"></ion-checkbox>
+          <label style="font-size:20px" class="content-background-color" for="Heterosexual">&nbsp; Heterosexual</label>
+        </ion-item>
+
+        <ion-item (click)="selectOrientation(1)" class="item-background-color">
+          <ion-checkbox color="autum-salmon" name="gay" [checked]="orientation == 1"></ion-checkbox>
+          <label style="font-size:20px" for="gay">&nbsp; Gay</label>
+        </ion-item>
+
+        <ion-item (click)="selectOrientation(2)" class="item-background-color">
+          <ion-checkbox color="autum-salmon" name="lesbian" [checked]="orientation == 2"></ion-checkbox>
+          <label style="font-size:20px" for="lesbian">&nbsp; Lesbian</label>
+        </ion-item>
+
+        <ion-item (click)="selectOrientation(3)" class="item-background-color">
+          <ion-checkbox color="autum-salmon" name="bisexual" [checked]="orientation == 3"></ion-checkbox>
+          <label style="font-size:20px" for="bisexual">&nbsp; Bisexual</label>
+        </ion-item>
+
+        <ion-item (click)="selectOrientation(4)" class="item-background-color">
+          <ion-checkbox color="autum-salmon" name="asexual" [checked]="orientation == 4"></ion-checkbox>
+          <label style="font-size:20px" for="asexual">&nbsp; Asexual</label>
+        </ion-item>
+
+        <ion-item (click)="selectOrientation(5)" class="item-background-color">
+          <ion-checkbox color="autum-salmon" name="demisexual" [checked]="orientation == 5"></ion-checkbox>
+          <label style="font-size:20px" for="demisexual">&nbsp; Demisexual</label>
+        </ion-item>
+
+        <ion-item (click)="selectOrientation(6)" class="item-background-color">
+          <ion-checkbox color="autum-salmon" name="pansexual" [checked]="orientation == 6"></ion-checkbox>
+          <label style="font-size:20px" for="pansexual">&nbsp; Pansexual</label>
+        </ion-item>
+
+        <ion-item (click)="selectOrientation(7)" class="item-background-color">
+          <ion-checkbox color="autum-salmon" name="queer" [checked]="orientation == 7"></ion-checkbox>
+          <label style="font-size:20px" for="queer">&nbsp; Queer</label>
+        </ion-item>
+
+        <ion-item (click)="selectOrientation(8)" class="item-background-color">
+          <ion-checkbox color="autum-salmon" name="questioning" [checked]="orientation == 8"></ion-checkbox>
+          <label style="font-size:20px" for="questioning">&nbsp; Questioning</label>
+        </ion-item>
+      </ion-list>
+
+    </div>
+    <!--
+    <div class="buttonsDiv">
+      <ion-button  expand="round" color="dark">
+        Done
+      </ion-button>
+    </div>
+    -->
+  </div>
+</ion-content>
+

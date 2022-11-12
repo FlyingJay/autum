@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "autum-e802f": {
+      "hosting": {
+        "app": [
+          "autum-e802f"
+        ]
+      }
+    }
+  }
+}

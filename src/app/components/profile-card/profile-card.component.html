@@ -1,0 +1,252 @@
+
+<div *ngIf="profile?.pictures?.length" [ngClass]="isCardFlipped ? 'is-flipped' : ''" class="cardz">
+  <div (click)="flip()" *ngIf="!isCardFlipped" [@slowFadeEnterLeave] class="cardz__face cardz__face--front">
+    <ion-card class="card" style="box-shadow:rgb(160 160 160 / 90%) 4px 4px 16px;overflow:hidden;">
+      <div *ngIf="isAndroid">
+        <ion-img #profilePic *ngFor="let picture of profile?.pictures; let i = index;" [src]="picture.picture" (ionError)="profilePic.src='../../assets/images/slide-1.png'" style="position:absolute;top:0;left:0;opacity:{{this.slideIndex == i ? '1' : '0'}};"></ion-img>
+      </div>
+      <div *ngIf="!isAndroid">
+        <img loading=lazy ng-cloak #profilePic *ngFor="let picture of profile?.pictures; let i = index;" [src]="picture.picture" (ionError)="profilePic.src='../../assets/images/slide-1.png'" style="position:absolute;top:0;left:0;opacity:{{this.slideIndex == i ? '1' : '0'}};">
+      </div>
+      <div class="ng-cloak imageOverlay"></div>
+      <div class="pictureSelect" *ngIf="profile.pictures?.length > 1" style="position:absolute;top:0;text-align:center;line-height:50px;color:#FFF;font-weight:bold;width:100%;">
+        <ion-icon (click)="slideImageTo(i)" *ngFor="let picture of profile.pictures; let i = index;" name="ellipse{{i!=slideIndex?'-outline':''}}" style="margin-right:5px;"></ion-icon>
+      </div>
+      <div class="pictureRight"(click)="slideImageRight(profile)" style="position:absolute;top:0;right:0;width:180px;height:245px;border-radius:0 0 0 20px;">
+      </div>
+      <div class="pictureLeft" (click)="slideImageLeft(profile)" style="position:absolute;top:0;left:0;width:180px;height:245px;border-radius:0 0 20px 0;">
+      </div>
+
+      <div class="itemdiv">
+        <ion-item lines="none" class="chatbox" style="background: linear-gradient(to top, #010101, #ffffff00);padding-bottom:0px;padding-left:{{isMatch() || isProfilePreview() ? '10px' : '110px'}};min-height:150px;">
+          <!-- Profile Layout (Deck, Profile Preview) -->
+          <ion-label *ngIf="!isMatch() && tutStep != 'pass' && tutStep != 'like' && tutStep != 'photoNext' && tutStep != 'photoBack'" style="margin-right:0;">
+            <div *ngIf="sliderOpacity == 0" [@fadeEnterLeave] [@fade]="bounce">
+              <h1 class="ion-text-start" style="font-size:36px;padding-left:10px;overflow:hidden;text-overflow:ellipsis;">{{profile.first_name | titlecase}}, <span>{{age()}}</span></h1>
+              <div *ngIf="profile.job" class="sameLineContent" style="padding-left:10px;">
+                <ion-icon slot="start" name="briefcase" expand="icon-only"></ion-icon>
+                <p class="ion-text-start">{{profile.job}}</p>
+              </div> 
+              <div *ngIf="!like?.is_active" style="padding:0 0 10px 0;width:100%;">
+                <ion-chip outline *ngFor="let profileInterest of profile.interests | slice:0:2; let i = index;" color="light" style="font-size:15px;margin-right:5px;font-weight:200;padding:4px 8px;">
+                  {{ profileInterest.interest.name }}
+                </ion-chip>
+              </div>
+              <div *ngIf="profile?.interests && profile?.interests.length == 0" style="height:40px;">
+              </div>
+            </div>
+          </ion-label>
+          <!-- Matches Layout -->
+          <ion-label *ngIf="isMatch()" (click)="goForChat($event)" style="margin-right:0;">
+            <h1 class="ion-text-start" style="font-size:36px;padding-left:10px;">{{profile.first_name | titlecase}}, <span>{{age()}}</span></h1>
+            <div *ngIf="profile.job" class="sameLineContent" style="padding-left:10px;">
+              <ion-icon slot="start" name="briefcase" expand="icon-only"></ion-icon>
+              <p class="ion-text-start">{{profile.job}}</p>
+            </div> 
+            <div *ngIf="!like?.is_active" style="padding:0 0 10px 0;width:100%;">
+              <ion-chip outline *ngFor="let profileInterest of profile.interests | slice:0:2; let i = index;" color="light" style="font-size:15px;margin-right:5px;font-weight:200;padding:4px 8px;">
+                {{ profileInterest.interest.name }}
+              </ion-chip>
+            </div>
+            <div *ngIf="profile?.interests && profile?.interests.length == 0" style="height:40px;">
+            </div>
+            <ion-label color="light" style="padding:18px 12px {{ like.last_message ? '45px' : '30px' }} 12px;position:relative;color:#FFF;font-size:20px;font-weight:200;width:100%;white-space:nowrap;text-overflow:ellipsis;">
+              {{ lastMessage || 'Send a message' }}
+            </ion-label>
+            <div style="position:absolute;right:0;bottom:10px;">
+              <ion-label>
+                <ion-text slot="end" color="autum-yellow">{{ lastMessageTime }}</ion-text>&nbsp;
+                <ion-icon style="font-size:20px;color:#FFF;vertical-align:bottom;" name="chevron-forward-outline" mode="ios" expand="icon-only"></ion-icon>
+              </ion-label>
+            </div>
+          </ion-label>
+        </ion-item>
+      </div>
+    </ion-card>
+  </div>
+
+  <div (click)="flip()" *ngIf="isCardFlipped" [@slowFadeEnterLeave] class="cardz__face cardz__face--back" style="box-shadow:rgb(160 160 160 / 90%) 4px 4px 16px;">
+    <ion-card #backOfCard (scroll)="onScroll($event)" class="card" style="background:{{gradients[profile.gradient || 'Dark Gray-White']}};overflow-y: {{ isCardFlipped ? 'scroll' : 'hidden' }};padding-bottom:120px;position:relative;">
+      <div class="back-divImg">
+        <ion-img class="back-img" #profileBack [src]="profile?.profile_picture_url" (ionError)="profileBack.src='../../assets/images/slide-1.png'"></ion-img>
+      </div>
+      <ion-list color="transparent" lines="full">
+        <ion-item  color="transparent" lines="none">
+          <ion-label>
+            <div class="sameLineContent">
+              <h1 class="ion-text-start">{{profile.first_name | titlecase}}, {{age()}}</h1>
+            </div>
+          </ion-label>
+        </ion-item>
+
+        <ion-item *ngIf="profile?.height" color="transparent" lines="none">
+          <ion-label>
+            <div class="sameLineContent">
+              <ion-icon style="padding-right:10px" slot="start" name="accessibility-outline" expand="icon-only" mode="ios"></ion-icon>
+              <h4  style="color:#37393E;">{{height()}}</h4>
+            </div>
+          </ion-label>
+        </ion-item>
+
+        <ion-item *ngIf="profile?.job" color="transparent" style="padding-bottom:10px" lines="none">
+          <ion-label>
+            <div class="sameLineContent">
+              <ion-icon style="padding-right:10px" slot="start" name="briefcase-outline" expand="icon-only" mode="ios"></ion-icon>
+              <h5> {{profile.job}}</h5>
+            </div>
+          </ion-label>
+        </ion-item>
+
+        <ion-item *ngIf="profile?.description" color="transparent" style="padding-bottom:10px" lines="none">
+          <ion-label>
+            <div class="sameLineContent2">
+              <ion-icon style="padding-right:10px" slot="start" name="pencil-outline" expand="icon-only" mode="ios"></ion-icon>
+              <h6>{{profile.description}}</h6>
+            </div>
+          </ion-label>
+        </ion-item>
+
+        <ion-item *ngIf="profile?.school?.name" color="transparent" style="padding-bottom:10px" lines="none">
+          <ion-label>
+            <div class="sameLineContent">
+              <ion-icon style="padding-right:10px" slot="start" name="school-outline" expand="icon-only" mode="ios"></ion-icon>
+              <h5> {{profile.school.name}}</h5>
+            </div>
+          </ion-label>
+        </ion-item>
+
+        <ion-item *ngIf="profile.interests?.length > 0" color="transparent" lines="none">
+          <div class="sameLineContent" style="width:100%">
+            <div style="padding-bottom:20px;width:100%">
+              <ion-icon style="vertical-align:top;padding-right:10px;padding-top:10px" slot="start" name="heart-outline" expand="icon-only" mode="ios"></ion-icon>
+              <app-scroll-horizontal [disableScrolling]="!isCardFlipped" class="sameLineContent" style="width: CALC(100% - 30px);">
+                <ion-chip color="#fff" *ngFor="let profileInterest of profile.interests" [ngClass]="this.profile.gradient== 'Salmon-White' || this.profile.gradient== 'Neutral'  ? 'ion-chip' : 'ion-chip2'">
+                  {{ profileInterest.interest.name }}
+                </ion-chip>
+              </app-scroll-horizontal>
+            </div>
+          </div>
+        </ion-item>
+
+        <ion-item *ngIf="profile?.id != user?.id" color="transparent" lines="none">
+          <div class='center-button' style="padding-top:10px;">
+            <ion-chip (click)="openReportUser($event)" style="text-transform:inherit;font-weight:normal;" shape=round color="autum-black">
+              Report & Block User
+            </ion-chip>
+          </div>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  </div>
+</div>
+
+<div *ngIf="!isProfilePreview() || !isCardScrollable" [@enterLeave]="!isCardFlipped || !isCardScrollable || enterSlider" [hidden]="isCardFlipped && isCardScrollable && !enterSlider" class="slider" style="background:rgba(250,224,222,{{isCardFlipped ? 0.2 : sliderOpacity}});box-shadow:{{tutStep == 'like' ? '0 0 0 max(100vh, 100vw) rgba(0, 0, 0, .7)' : ''}};">
+  <div class="example-box" [@bounce]="bounce"
+    (cdkDragMoved)="sliderDragging($event)"
+    (cdkDragReleased)="drop($event)"
+    [cdkDragDisabled]="bounce || disableDrag"
+    cdkDragBoundary=".slider" 
+    cdkDragLockAxis="x" 
+    cdkDrag>
+    <div 
+      [ngClass]="isCardFlipped ? 'sliderBackground sliderFlipped' : 'sliderBackground'" 
+      style="box-shadow:{{!isCardFlipped ? 'var(--ion-color-autum-salmon)' : 'var(--ion-color-autum-salmon)'}} 0px 0px {{sliderButtonGlow}}px inset;">
+    </div>
+    <!-- Pass icon for front of card -->
+    <div *ngIf="!bounce && !waitForBounce && !isCardFlipped && !isLiking" [@fadeEnterLeave]>
+      <ng-lottie [@fade]="bounce"
+          (click)="onPassClick()"
+          width="40px"
+          height="40px"
+          style="position:absolute;z-index:11;top:14px;left:16px;"
+          [options]="sliderPassIconWhiteOptions"
+          (animationCreated)="sliderPassIconWhiteAnimated($event)">
+      </ng-lottie>
+    </div>
+    <!-- Pass icon for back of card -->
+    <div *ngIf="!bounce && !waitForBounce && isCardFlipped && !isLiking" [@fadeEnterLeave]>
+      <ng-lottie [@fade]="bounce"
+          (click)="onPassClick()"
+          width="40px"
+          height="40px"
+          style="position:absolute;z-index:11;top:14px;left:16px;"
+          [options]="sliderPassIconBlackOptions"
+          (animationCreated)="sliderPassIconBlackAnimated($event)">
+      </ng-lottie>
+    </div>
+    <!-- Like icon for bounce -->
+    <div *ngIf="bounce || waitForBounce" [@fadeEnterLeave]>
+      <ng-lottie [@fadeInverse]="bounce"
+        width="120px"
+        height="120px"
+        style="position:absolute;top:-23px;left:-24px;z-index:11;"
+        [options]="sliderLikeIconOptions"
+        (animationCreated)="sliderHelpIconAnimated($event)">
+      </ng-lottie>
+    </div>
+    <!-- Like icon while sliding -->
+    <ng-lottie *ngIf="sliderOpacity > 0" [@fadeEnterLeave] 
+        width="120px"
+        height="120px"
+        style="position:absolute;z-index:5;top:-23px;left:-24px;z-index:12;"
+        [options]="sliderLikeIconOptions"
+        (animationCreated)="sliderLikeIconAnimated($event)">
+    </ng-lottie>
+  </div>
+</div>
+
+<div *ngIf="tutStep == 'intro'" class="tutOverlay" (click)="setTutStep('intro2')">
+  Welcome to Autum!
+  <br/>
+  <br/>
+  where people matter
+  <br/>
+  <br/>
+  Tap to continue...
+</div>
+
+<div *ngIf="tutStep == 'intro2'" class="tutOverlay" (click)="setTutStep('intro3')">
+
+<!--  Autum helps you follow each connection to its conclusion.-->
+<br>
+  <br>
+  Actually talk to your matches, meet up sooner, and avoid ghosting.
+
+  <br/>
+  <br/>
+  Tap to continue...
+</div>
+
+<div *ngIf="tutStep == 'intro3'" class="tutOverlay" (click)="setTutStep('photoNext')">
+  So you can experience a dating app without all the bullsh*t
+  <br/>
+  <br/>
+  Tap to continue...
+</div>
+
+<div *ngIf="tutStep == 'photoNext'" class="tutText">
+  Tap right to scroll through photos
+</div>
+
+<div *ngIf="tutStep == 'photoBack'" class="tutText">
+  Tap left to scroll through photos
+</div>
+
+<div *ngIf="tutStep == 'pass'" class="tutText">
+  Tap X to pass
+</div>
+
+<div *ngIf="tutStep == 'like'" class="tutText">
+  Slide right to like
+</div>
+
+<div *ngIf="tutStep == 'flip'" class="tutOverlay" (click)="flip(); setTutStep('end');">
+  Tap anywhere to see more!
+</div>
+
+<div *ngIf="tutStep == 'end'" class="tutOverlay" (click)="setTutStep(null)">
+  And that's it!
+  <br/>
+  <br/>
+  Tap to continue...
+</div>

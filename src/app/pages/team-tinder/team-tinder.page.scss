@@ -1,0 +1,16 @@
+
+ion-item {
+  border-bottom: 1px solid
+    var(--ion-item-border-color, var(--ion-border-color, var(--ion-color-step-150, rgba(0, 0, 0, 0.13))));
+  --inner-border-width: 0 0 0 0;
+  // --inner-padding-end: 0;
+  //   --padding-start: 0;
+}
+ion-text {
+  color: rgba(66, 66, 66, 0.8392156862745098) !important;
+  font-size: 12px;
+  font-weight: bold;
+}
+p {
+  font-size: 12px;
+}

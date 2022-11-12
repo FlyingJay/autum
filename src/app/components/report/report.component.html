@@ -1,0 +1,30 @@
+<ion-content scroll-y="false">
+  <div class="content" (click)='closeModal()'>
+    <ion-card>
+      <div class="avatarAbs">
+        <ion-icon style="font-size:40px"name="id-card-outline" color="autum-orange"></ion-icon>
+      </div>
+      <ion-item>
+        <ion-label>
+          <h2 class="ion-text-center">Report</h2>
+          <p class="ion-text-wrap ion-text-center">We take our community very seriously. Please let us know what happened.</p>
+        </ion-label>
+      </ion-item>
+      <ion-list>
+        <ion-item class="reportItem" (click)="endConvo(101); $event.stopPropagation();">
+          <ion-icon slot="start" name="camera-outline" color="autum-red"></ion-icon>
+          <h6>Inappropriate Photos</h6>
+        </ion-item>
+        <ion-item  class="reportItem" (click)="endConvo(102); $event.stopPropagation();">
+          <ion-icon slot="start" name="trash-outline" color="autum-black"></ion-icon>
+          <h6>Spam Account</h6>
+        </ion-item>
+        <ion-item  class="reportItem" (click)="endConvo(103); $event.stopPropagation();">
+          <ion-icon slot="start" name="chatbox-ellipses-outline" color="autum-purple"></ion-icon>
+          <h6>Harassing Comments</h6>
+        </ion-item>
+      </ion-list>
+
+    </ion-card>
+  </div>
+</ion-content>

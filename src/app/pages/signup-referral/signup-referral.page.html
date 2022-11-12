@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button color="dark"></ion-back-button>
+            <ion-title class="ion-text-uppercase">Sign up</ion-title>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="content-background-color">
+    <div style="position:absolute;top:10px;right:10px;">
+        <ion-text (click)="finishSignup()" style="font-size:20px;" color="medium">SKIP</ion-text>
+    </div>
+    <div style="min-height:40px"class="ion-padding">
+        <div class="privacy ion-padding-bottom">
+            <p style="font-size:30px" class="dark ion-text-start ">Referred by...</p>
+            <p style="font-size:12px"class="medium ion-text-start">Select the brand ambassador who referred you!</p>
+            <p style="font-size:12px"class="medium ion-text-start"> If you weren't referred by anyone, please press <strong>Skip</strong>.</p>
+
+            <ion-card style="border-radius:20px;margin-top:80px"class=ion-card-input>
+                <ion-item lines=none>
+                    <ion-input style="text-align:center;font-size:16px!important" mode="ios" readonly (click)="showPicker()" expand="block" value="Choose from list.."></ion-input>
+                </ion-item>
+            </ion-card>
+        </div>
+    </div>
+</ion-content>

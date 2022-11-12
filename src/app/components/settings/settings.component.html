@@ -1,0 +1,145 @@
+
+<div *ngIf="isLoading" class="nodataDiv ion-padding">
+  <ion-thumbnail slot="start" class="ovalIcon">
+    <img src="assets/images/logo.svg">
+  </ion-thumbnail>
+  <ion-spinner name="dots"></ion-spinner>
+  <ion-text class="dark ion-text-center" color="dark" style="font-size:24px;font-family:AutumFont-light;font-weight:bolder;">
+    Getting your settings...
+  </ion-text>
+</div>
+
+<div class="fadeIn" style="opacity:{{isLoading ? 0 : 1}}">
+  <ion-row>
+    <ion-col size="12">
+    </ion-col>
+    <ion-col size="12">
+    </ion-col>
+  </ion-row>
+  <ion-row>
+  </ion-row>
+  <ion-card (click)="goToPage('phone-number')">
+    <ion-item>
+      <ion-text style="font-family:" slot="start">Phone Number</ion-text>
+      <ion-text style="font-family:AutumFont" slot="end" class="h6Color" color="autum-purple">{{ user ? user.phone : '1 XXX-XXX-XXXX' }}&nbsp;&nbsp;</ion-text>
+    </ion-item>
+  </ion-card>
+  <br/>
+  <ion-card>
+    <ion-item>
+      <ion-text slot="start">Swiping in</ion-text>
+      <ion-button *ngIf="!userLocation" expand="full" fill="clear" slot="end" class="ion-text-capitalize" color="autum-purple">Updating location..</ion-button>
+      <ion-button *ngIf="userLocation" expand="full" fill="clear" slot="end" class="ion-text-capitalize" color="{{userLocation == 'Current Location' ? 'autum-purple' : 'autum-red'}}">{{ userLocation }}</ion-button>
+    </ion-item>
+  </ion-card>
+  <ion-card (click)="goToPage('show-me')">
+    <ion-item>
+      <ion-label>
+        <ion-text class="textBold">I'm interested in</ion-text>
+        <p *ngIf="user && user.show_male && !user.show_female">Men</p>
+        <p *ngIf="user && user.show_female && !user.show_male">Women</p>
+        <p *ngIf="user && user.show_female && user.show_male">Everyone</p>
+      </ion-label>
+      <ion-icon slot="end" color="dark" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+  </ion-card>
+  <!--
+  <ion-card>
+    <ion-item>
+      <ion-text color="dark" class="textBold" slot="start">Maximum distance</ion-text>
+      <ion-text color="dark" slot="end" style="white-space:nowrap;">{{rangeSingle ? rangeSingle : '...'}}
+        <ion-badge *ngIf="user && user.show_distance_km" (click)="toggleShowDistance('mi')" style="box-shadow:rgb(0 0 0 / 12%) 0px 4px 16px;font-size:14px; vertical-align:bottom" color="autum-red">km</ion-badge>
+        <ion-badge *ngIf="user && !user.show_distance_km" (click)="toggleShowDistance('km')" style="box-shadow:rgb(0 0 0 / 12%) 0px 4px 16px;font-size:14px; vertical-align:bottom" color="autum-red">mi</ion-badge>
+      </ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-range (ionChange)="updateDistance()" min="1" max="100" step="1" color="dark" [(ngModel)]="rangeSingle" style="padding-top:0;"></ion-range>
+    </ion-item>
+  </ion-card>
+-->
+  <ion-card>
+    <ion-item>
+      <ion-text class="textBold" slot="start">Age range</ion-text>
+      <ion-text color="dark" slot="end">{{rangeDualKnobs.lower}} - {{rangeDualKnobs.upper}}&nbsp;</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-range (ionChange)="updateAgeRange()" dualKnobs="true" min="18" max="60" step="1" [(ngModel)]="rangeDualKnobs" color="dark" style="padding-top:0;"></ion-range>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-text class="textBold" slot="start">Height range</ion-text>
+      <ion-text color="dark" slot="end" style="white-space:nowrap;">
+        {{heightLower()}} - {{heightUpper()}}
+        <ion-badge *ngIf="user && user.show_height_cm" (click)="toggleShowHeight('in')" style="font-size:14px; vertical-align:bottom;box-shadow:rgb(0 0 0 / 12%) 0px 4px 16px" color="autum-red">cm</ion-badge>
+        <ion-badge *ngIf="user && !user.show_height_cm" (click)="toggleShowHeight('cm')" style="font-size:14px; vertical-align:bottom;box-shadow:rgb(0 0 0 / 12%) 0px 4px 16px" color="autum-red">in</ion-badge>
+      </ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-range (ionChange)="updateHeightRange()" dualKnobs="true" min="36" max="84" step="1" [(ngModel)]="rangeHeightDualKnobs" color="dark" style="padding-top:0;"></ion-range>
+    </ion-item>
+  </ion-card>
+<!--<ion-card (click)="goToPage('settings-interest-level')">
+  <ion-item>
+    <ion-label>
+      <ion-text class="textBold"> Common Interests </ion-text>
+      <p>Somewhat interested</p>
+    </ion-label>
+    <ion-icon slot="end" color="dark" name="chevron-forward-outline"></ion-icon>
+  </ion-item>
+</ion-card>
+<ion-card (click)="goToPage('settings-experience-level')">
+  <ion-item>
+    <ion-label>
+      <ion-text class="textBold"> Common Experiences </ion-text>
+      <p>Somewhat interested</p>
+    </ion-label>
+    <ion-icon slot="end" color="dark" name="chevron-forward-outline"></ion-icon>
+  </ion-item>
+</ion-card>-->
+  <ion-card>
+    <ion-item>
+      <ion-text >Show me on Autum</ion-text>
+      <ion-checkbox color="autum-salmon" (click)="toggleShowMe()" slot="end" checked="{{ user && !user.is_hidden }}"></ion-checkbox>
+    </ion-item>
+  </ion-card>
+  <ion-item>
+    <p class="verifyText ion-text-center"> This toggle makes you invisible, you will no longer be shown to others on the app.</p>
+  </ion-item>
+  <ion-card >
+    <ion-button fill="clear" expand="full" class="logout" color="dark" (click)="resetTutorials()">Activate Tutorials</ion-button>
+  </ion-card>
+  <ion-item>
+    <p class="verifyText ion-text-center">Missed something? Tap here to re-activate the tutorial popups.</p>
+  </ion-item>
+  <ion-card>
+    <ion-button (click)="goToPage('pre-login-tut-settings')" fill="clear" expand="full" class="logout ion-text-capitalize" color="dark">
+      Why Us
+    </ion-button>
+  </ion-card>
+  <ion-card>
+    <ion-button onclick="window.location.href='mailto:hello@autumapp.com?subject=Feedback';" fill="clear" expand="full" class="logout ion-text-capitalize" color="dark">
+      Report a Bug
+    </ion-button>
+  </ion-card>
+  <ion-card>
+    <ion-button fill="clear" expand="full" class="logout" color="dark" (click)="logout()">Logout</ion-button>
+  </ion-card>
+  <div class="ovelDivContentBottom">
+    <ion-thumbnail slot="start" class="ovalIcon">
+      <ion-img src="assets/images/logo.svg"></ion-img>
+    </ion-thumbnail>
+    <p class="excepTextSize">Version 2.0</p>
+  </div>
+  <ion-card (click)="goToPage('delete-confirm')">
+    <ion-button fill="clear" expand="full" class="logout ion-text-capitalize" color="dark">Delete Account
+    </ion-button>
+  </ion-card>
+  <ion-label class=" ovelDivContentBottom legalLabelContent">
+    <a href="https://fallinlove.app/terms-and-conditions" style="text-decoration:none;">
+      <p class="excepTextSize darkColor">Terms of Service</p>
+    </a>
+    <a href="https://fallinlove.app/privacy-policy" style="text-decoration:none;">
+      <p class="excepTextSize darkColor">Privacy Policy</p>
+    </a>
+  </ion-label>

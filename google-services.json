@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "475500407486",
+    "project_id": "autum-e802f",
+    "storage_bucket": "autum-e802f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475500407486:android:e5c08e93e5f27893708cef",
+        "android_client_info": {
+          "package_name": "com.autum.dating"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "475500407486-75b9n1simdhktujh8gm0m1rm28ahdqje.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARmNlERQe0qdv3hfOlQYQzRh9U8mjqDhw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "475500407486-75b9n1simdhktujh8gm0m1rm28ahdqje.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "475500407486-u0dq83s8d8ej5ji5td1ue76umfalp61v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.autum.ios"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+    </ion-buttons>
+    <ion-button slot="end" color="danger" expand="round" class="headerButton ion-text-capitalize"> Get Autum Plus
+    </ion-button>
+    <ion-title class="ion-no-padding">My Autum Plus</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-card *ngFor="let items of tinderPlusData; let i= index">
+      <ion-item>
+        <ion-avatar [ngStyle]="{'background':'url('+ items.image  +')', 'background-size':'cover'}" slot="start">
+        </ion-avatar>
+        <ion-label>
+          <h2 class="ion-text-capitalize">{{items.head}}</h2>
+          <p class="ion-text-wrap">{{items.subHead}}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item class="noborderBottom">
+        <ion-toggle slot="end" *ngIf="items.toggle" color="danger"></ion-toggle>
+        <ion-icon name="checkmark" expand="icon-only" slot="end" *ngIf="!items.head1right && !items.toggle"
+          color="danger"></ion-icon>
+        <ion-button fill="clear" *ngIf="items.head1right" slot="end" color="medium">{{items.head1right}}</ion-button>
+        <ion-label>
+          <h2 class="ion-text-capitalize">{{items.head1}}</h2>
+          <p class="ion-text-wrap">{{items.subHead1}}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item *ngIf="items.head2" class="noborderBottom">
+        <ion-toggle slot="end" *ngIf="items.toggle" color="danger"></ion-toggle>
+        <ion-label>
+          <h2 class="ion-text-capitalize">{{items.head2}}</h2>
+          <p class="ion-text-wrap">{{items.subHead2}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+
+</ion-content>

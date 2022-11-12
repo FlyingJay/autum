@@ -1,0 +1,28 @@
+<ion-content class="ion-padding" scroll-y="false">
+  <div class="contentHeight">
+    <div class="centerContent">
+      <h2 style="margin-top:-90px">{{ verb }}!</h2>
+      <p style="margin-top:20px">You and {{ like?.liker?.first_name | titlecase }} liked each other.</p>
+    </div>
+    <div style="margin-bottom:30px"></div>
+    <div class="centerContent1">
+      <div class="ion-padding-end">
+        <ion-img #userPic src="{{ like?.subject?.profile_picture_url }}" (ionError)="userPic.src='../../assets/images/slide-1.png'"></ion-img>
+      </div>
+      <ion-img #otherPic src="{{ like?.liker?.profile_picture_url }}" (ionError)="otherPic.src='../../assets/images/slide-1.png'"></ion-img>
+    </div>
+    <div style="margin-bottom:-70px!important"class="centerContent">
+      <ion-button *ngIf="like?.subject?.remaining_likes_count" fill="outline" shape="round" expand="block" color="light" (click)="closeModal()">
+        <ion-icon name="person" mode="md" expand="icon-only" class="ion-margin-end"></ion-icon>Keep Swiping
+      </ion-button>
+      <h6 *ngIf="like?.subject?.remaining_likes_count == 0" style="margin-top:40px;text-align:center">You now have three people wanting to chat. Let’s see where it goes!</h6>
+      <ion-button color=autum-red shape="round" expand="block" (click)="goToChat()">
+        <ion-icon name="chatbubbles" mode="ios" expand="icon-only" class="ion-margin-end"></ion-icon>Talk to {{ like?.liker?.first_name | titlecase }}
+      </ion-button>
+      <h4 *ngIf="like?.subject?.remaining_likes_count == 1" style="text-align:center; margin-top:40px">One more like to go!</h4>
+      <!--<h4 *ngIf="like?.subject?.remaining_likes_count == 2" style="margin-top:40px">{{ like?.subject?.remaining_likes_count }} 2 likes to go.</h4>-->
+<!--   <h4 *ngIf="like?.subject?.remaining_likes_count == 3" style="margin-top:40px">{{ like?.subject?.remaining_likes_count }} matches remaining</h4>-->
+    </div>
+  </div>
+</ion-content>
+

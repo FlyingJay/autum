@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+      <ion-title class="ion-text-uppercase">Sign up</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="content-background-color">
+
+<div *ngIf="!pageloaded" style="line-height:500px; text-align:center">
+  <ion-spinner name="crescent"></ion-spinner>
+</div>
+
+  <div class="ion-padding">
+    <div class="privacy ion-padding-bottom">
+      <p style="font-size:30px;text-align:center!important" class= "dark ion-text-start">Add photos</p>
+      <p style="font-size:12px"class="medium ion-text-center">Add at least <b>two</b> photos to continue.</p>
+    </div>
+
+    <ktd-grid class="center-screen"
+            *ngIf="pageloaded"
+            [cols]="cols"
+            [rowHeight]="rowHeight"
+            [layout]="layout"
+            compactType="horizontal"
+            (layoutUpdated)="onLayoutUpdated($event)"
+            (dragStarted)="onDragStarted()">
+
+      <ktd-grid-item resizable="false" [draggable]="pictures[i]" *ngFor="let item of layout; trackBy:trackById; index as i" [id]="item.id">
+        <ion-card  class="ion-card-grid" [ngClass]="{'cardBorder': !pictures[i]}">
+          <div *ngIf="pictures[i]" class="imageDiv" style="background:url('{{ pictures[i].picture }}');background-size:cover;">
+          </div>
+          <div *ngIf="pictures[i]" (click)="deletePicture(i)" class="closeIcon">
+            <ion-icon name="close" expand="icon-only"></ion-icon>
+          </div>
+          <div *ngIf="!pictures[i]" class="shinytext addIcon" (click)="uploader.click()">
+            <ion-icon name="add" expand="icon-only"></ion-icon>
+          </div>
+          <div *ngIf="!pictures[i] && isUploading[i] || isDeleting[i]" class="loadIcon">
+            <ion-spinner name="crescent" ></ion-spinner>
+          </div>
+
+          <input #uploader type="file" accept="heif,image/*" (change)="createPicture($event, i)"  style="display:none;"/>
+
+        </ion-card>
+      </ktd-grid-item>
+    </ktd-grid>
+
+
+    <div class="buttonsDiv" *ngIf="pictures[1]">
+      <ion-button  (click)="verifyPhoto()"expand="round" type="submit" color="dark">Next
+      </ion-button>
+    </div>
+  </div>
+
+
+</ion-content>

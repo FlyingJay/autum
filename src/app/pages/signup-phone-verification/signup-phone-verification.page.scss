@@ -1,0 +1,99 @@
+ion-list {
+  background: #fff!important;
+}
+
+.partitioned {
+  padding-left: 15px;
+  letter-spacing: 42px;
+  border: 0;
+  background: linear-gradient(to left, #d9d9d9 70%, rgba(217, 217, 217, 0) 0%);
+  background-position: bottom;
+  background-size: 50px 4px;
+  background-repeat: repeat-x;
+  background-position-x: 35px;
+  width: 190px;
+  min-width: 190px;
+  max-width: 190px;
+  // margin-left: 65px;
+  // margin-right: 65px;
+  font-size: 24px;
+}
+
+ion-content {
+  --background: white;
+}
+
+.divInner {
+  left: 0;
+  position: relative;
+  display: flex;
+}
+
+.divOuter {
+  width: 100%;
+  overflow: hidden;
+}
+
+.marginTop {
+  margin-top: 10%;
+  justify-content: center;
+  display: flex;
+}
+
+.btnSubmit {
+  --border-radius: 7px;
+}
+
+.inputBorderAndroid {
+  border-bottom: 4px solid #d9d9d9;
+  width: 113px;
+  font-size: 24px;
+  letter-spacing: 10px;
+  padding-left :2px!important;
+  padding-right:2px!important;
+  text-align:center;
+}
+.inputBorderiOS {
+  border-bottom: 4px solid #d9d9d9;
+  width: 130px;
+  font-size: 24px;
+  letter-spacing: 10px;
+  padding-left :20px!important;
+  padding-right:2px!important;
+  text-align:center;
+}
+
+
+.textBold {
+  color: var(--ion-color-medium);
+}
+
+.divMedium {
+  font-size: 10px;
+  color: var(--ion-color-medium);
+}
+
+.dangerspan {
+  color: var(--ion-color-danger);
+}
+
+.buttonsDiv {
+  display: flex;
+  text-transform: capitalize;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 40px;
+  ion-button {
+    max-width: 250px;
+    min-width: 220px;
+    width: 250px;
+    height: 36px;
+    //   --background: linear-gradient(to right, rgb(233, 30, 99), rgb(255, 138, 101));
+    //   --background-focused: linear-gradient(to right, rgb(233, 30, 99), rgb(255, 138, 101));
+  }
+  p {
+    margin-top: 0;
+    margin-bottom: 26px;
+  }
+}

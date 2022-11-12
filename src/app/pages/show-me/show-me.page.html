@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-capitalize">Show me</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-radio-group (ionChange)="updateShowMe()" [(ngModel)]="showMeSelect">
+      <ion-item>
+        <p>Men</p>
+        <ion-radio value="men" slot="end" color="danger"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <p>Women</p>
+        <ion-radio value="women" slot="end" color="danger"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <p>Everyone</p>
+        <ion-radio value="everyone" slot="end" color="danger"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+
+    <div class="backGray">
+     <!-- <ion-list-header>
+        <ion-label>Dating welcomes everyone</ion-label>
+      </ion-list-header>
+      <ion-item (click)="gotoMatch()">
+        <p class="ion-text-start" color="medium">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos,
+          temporibus eveniet aperiam distinctio
+          architecto vel eum minima incidunt et similique quos laudantium nam obcaecati laboriosam totam corporis?
+          Reiciendis, eum cumque?</p>
+      </ion-item>-->
+
+    </div>
+
+  </ion-list>
+</ion-content>

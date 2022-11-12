@@ -1,0 +1,67 @@
+
+.content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    background: white;
+
+    padding-top: 42px;
+}
+ion-button.facebook {
+    margin-bottom: 10px !important;
+    margin-top: 5px !important;
+    --background: linear-gradient(to right, rgb(26, 35, 126), rgba(63, 81, 181, 0.8901960784313725));
+    --background-focused: linear-gradient(to right, rgb(26, 35, 126), rgba(63, 81, 181, 0.8901960784313725)) !important;
+    height: 40px;
+}
+.privacy {
+    p {
+        font-weight: bold;
+        color: gray;
+    }
+}
+.buttonsDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 80px;
+    ion-button {
+        max-width: 250px;
+        min-width: 220px;
+        width: 250px;
+        height: 40px;
+    }
+    p {
+        margin-top: 0;
+        margin-bottom: 26px;
+    }
+}
+.privacy,
+.paddingHorizontal {
+    ion-text {
+        font-size: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+ion-item {
+    --background: transparent;
+    --inner-border-width: 0 0 0px 0;
+}
+ion-icon {
+    font-weight: bolder;
+    font-size: 30px;
+    color: gray;
+}
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}

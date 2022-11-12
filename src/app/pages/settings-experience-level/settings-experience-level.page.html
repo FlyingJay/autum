@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+      <ion-title class="ion-text-uppercase">Discovery Settings</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content-background-color" >
+  <div class="ion-padding">
+    <div class="privacy ion-padding-bottom">
+      <p style="font-size:30px" class="dark ion-text-start ">Common Experiences</p>
+      <p style="font-size:12px"class="medium ion-text-start">How much do you value having common experiences with someone?</p>
+        <ion-list>
+          <ion-item (click)="selectExperienceLevel(0)" class="item-background-color">
+            <ion-checkbox [checked]="ExperienceLevel == 0" name="I don't care"></ion-checkbox>
+            <label style="font-size:20px" class="content-background-color" for="I Don't Care">&nbsp; I Don't Care</label>
+          </ion-item>
+          <ion-item (click)="selectExperienceLevel(1)" class="item-background-color">
+            <ion-checkbox [checked]="ExperienceLevel == 1" name="Least Important"></ion-checkbox>
+            <label style="font-size:20px" class="content-background-color" for="Least Important">&nbsp; Least Important</label>
+          </ion-item>
+          <ion-item (click)="selectExperienceLevel(2)" class="item-background-color">
+            <ion-checkbox [checked]="ExperienceLevel == 2" name="Somewhat Important"></ion-checkbox>
+            <label style="font-size:20px" for="Somewhat Important">&nbsp; Somewhat Important</label>
+          </ion-item>
+          <ion-item (click)="selectExperienceLevel(3)" class="item-background-color">
+            <ion-checkbox [checked]="ExperienceLevel == 3" name="Very important"></ion-checkbox>
+            <label style="font-size:20px" for="Very Important">&nbsp; Very Important</label>
+          </ion-item>
+        </ion-list>
+    </div>
+    <!--
+    <div class="buttonsDiv">
+      <ion-button (click)="validateAndContinue()" expand="round" type="submit" color="dark">
+        Next
+      </ion-button>
+    </div>
+    -->
+  </div>
+</ion-content>
+

@@ -1,0 +1,212 @@
+<ion-content [ngClass]="{'contentIos': isIos}">
+  <div *ngFor="let item of data" class="cardCenter">
+    <div *ngIf="item.id === 'refresh'" class="cardRefresh">
+      <div class="cardRefreshContent">
+        <ion-card>
+          <ion-slides pager="true" [options]="slideOpts">
+            <ion-slide>
+              <div class="center color">
+                <h1>{{item.mainHeader}}</h1>
+                <div class="iconDivBackground">
+                  <ion-icon name={{item.icon}}></ion-icon>
+                </div>
+                <h3>{{item.header}}</h3>
+                <h6>{{item.subHeader}}</h6>
+              </div>
+            </ion-slide>
+            <ion-slide>
+              <div class="center color">
+                <h1>{{item.mainHeader}}</h1>
+                <div class="iconDivBackground">
+                  <ion-icon name={{item.icon}}></ion-icon>
+                </div>
+                <h3>{{item.header}}</h3>
+                <h6>{{item.subHeader}}</h6>
+              </div>
+            </ion-slide>
+            <ion-slide>
+              <div class="center color">
+                <h1>{{item.mainHeader}}</h1>
+                <div class="iconDivBackground">
+                  <ion-icon name={{item.icon}}></ion-icon>
+                </div>
+                <h3>{{item.header}}</h3>
+                <h6>{{item.subHeader}}</h6>
+              </div>
+            </ion-slide>
+            <ion-slide>
+              <div class="center color">
+                <h1>{{item.mainHeader}}</h1>
+                <div class="iconDivBackground">
+                  <ion-icon name={{item.icon}}></ion-icon>
+                </div>
+                <h3>{{item.header}}</h3>
+                <h6>{{item.subHeader}}</h6>
+              </div>
+            </ion-slide>
+            <ion-slide>
+              <div class="center color">
+                <h1>{{item.mainHeader}}</h1>
+                <div class="iconDivBackground">
+                  <ion-icon name={{item.icon}}></ion-icon>
+                </div>
+                <h3>{{item.header}}</h3>
+                <h6>{{item.subHeader}}</h6>
+              </div>
+            </ion-slide>
+          </ion-slides>
+
+          <ion-row class="row_bottom">
+            <ion-col size="4" *ngFor="let columns of item.column; let i= index"
+              [ngClass]="{'borders': i === 0 || 1 && i !=2}" (click)="showCustomButton(i)">
+              <ion-label class="ion-text-center">
+                <div class="levelDiv">
+                  <ion-button size="small" expand="block" class="columnButtonTop" *ngIf="columns.head && show"
+                    class="custom_button"><span>{{columns.head}}</span></ion-button>
+                  <h1>{{columns.month}}</h1>
+                  <h3>{{columns.text}}</h3>
+                  <h2>{{columns.amount}}</h2>
+                </div>
+              </ion-label>
+            </ion-col>
+          </ion-row>
+          <div class="buttonClass ion-padding-vertical">
+            <ion-button expand="block" (click)="closeModal(item.id)">{{item.button}}</ion-button>
+          </div>
+        </ion-card>
+        <ion-label *ngIf="item.id === 'refresh'" class="ion-text-center">
+          <h4>{{item.descriptionHead}}</h4>
+          <p class="ion-padding-horizontal ion-text-center">{{item.description}}</p>
+        </ion-label>
+      </div>
+    </div>
+
+    <div *ngIf="item.id === 'flash'" class="cardFlash">
+      <ion-card>
+        <div class="centerFlash color">
+          <h1>{{item.mainHeader}}</h1>
+          <div class="iconDivBackgroundFlash">
+            <h2 class="ion-no-margin">{{item.boost}}</h2>
+            <ion-text>{{item.view}}</ion-text>
+          </div>
+          <h3>{{item.header}}</h3>
+          <ion-item>
+            <p class="ion-text-center">{{item.subHeader}}</p>
+          </ion-item>
+        </div>
+        <ion-row class="row_bottom">
+          <ion-col size="4" *ngFor="let columns of item.column; let i= index"
+            [ngClass]="{'borders': i === 0 || 1 && i !=2}" (click)="showCustomButton(i)">
+            <ion-label class="ion-text-center">
+              <div class="levelDiv">
+                <ion-button size="small" expand="block" class="columnButtonTop" *ngIf="columns.head && show"
+                  class="custom_button"><span>{{columns.head}}</span></ion-button>
+                <h1>{{columns.month}}</h1>
+                <h3>{{columns.text}}</h3>
+                <h2>{{columns.amount}}</h2>
+              </div>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <div class="buttonClass ion-padding-vertical">
+          <ion-button expand="block" (click)="closeModal(item.id)">{{item.button}}</ion-button>
+          <div class="border_bottom">
+            <div class="bordeerBottomdiv"></div>
+            <div class="absCenterdivOr">
+              <p>or</p>
+            </div>
+          </div>
+          <ion-button expand="block" (click)="closeModal(item.id)" fill="outline">
+            <div>
+              <p class="upper">{{item.button1}}</p>
+              <p class="bottom">{{item.button2}}</p>
+            </div>
+          </ion-button>
+        </div>
+      </ion-card>
+    </div>
+
+
+    <ion-card *ngIf="item.id === 'star'">
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide>
+          <div class="centerStar color">
+            <h1>{{item.mainHeader}}</h1>
+            <div class="iconDivBackground"
+              [ngStyle]="{'background':'url('+ item.image +')', 'background-size':'cover'}">
+            </div>
+            <h5>{{item.header}}</h5>
+            <h6>{{item.subHeader}}</h6>
+            <p class="ion-no-margin">{{item.subheader1}}</p>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="centerStar color">
+            <h1>{{item.mainHeader}}</h1>
+            <div class="iconDivBackground"
+              [ngStyle]="{'background':'url('+ item.image +')', 'background-size':'cover'}">
+            </div>
+            <h5>{{item.header}}</h5>
+            <h6>{{item.subHeader}}</h6>
+            <p class="ion-no-margin">{{item.subheader1}}</p>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="centerStar color">
+            <h1>{{item.mainHeader}}</h1>
+            <div class="iconDivBackground"
+              [ngStyle]="{'background':'url('+ item.image +')', 'background-size':'cover'}">
+            </div>
+            <h5>{{item.header}}</h5>
+            <h6>{{item.subHeader}}</h6>
+            <p class="ion-no-margin">{{item.subheader1}}</p>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="centerStar color">
+            <h1>{{item.mainHeader}}</h1>
+            <div class="iconDivBackground"
+              [ngStyle]="{'background':'url('+ item.image +')', 'background-size':'cover'}">
+            </div>
+            <h5>{{item.header}}</h5>
+            <h6>{{item.subHeader}}</h6>
+            <p class="ion-no-margin">{{item.subheader1}}</p>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="centerStar color">
+            <h1>{{item.mainHeader}}</h1>
+            <div class="iconDivBackground"
+              [ngStyle]="{'background':'url('+ item.image +')', 'background-size':'cover'}">
+            </div>
+            <h5>{{item.header}}</h5>
+            <h6>{{item.subHeader}}</h6>
+            <p class="ion-no-margin">{{item.subheader1}}</p>
+          </div>
+        </ion-slide>
+      </ion-slides>
+
+      <ion-row class="row_bottom">
+        <ion-col size="4" *ngFor="let columns of item.column; let i= index"
+          [ngClass]="{'borders': i === 0 || 1 && i !=2}" (click)="showCustomButton(i)">
+          <ion-label class="ion-text-center">
+            <div class="levelDiv">
+              <ion-button size="small" expand="block" class="columnButtonTop" *ngIf="columns.head && show"
+                class="custom_button"><span>{{columns.head}}</span></ion-button>
+              <h1>{{columns.month}}</h1>
+              <h3>{{columns.text}}</h3>
+              <h2>{{columns.amount}}</h2>
+            </div>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+      <div class="buttonClass ion- padding-vertical">
+        <ion-button expand="block" (click)="closeModal(item.id)">{{item.button}}</ion-button>
+      </div>
+    </ion-card>
+    <ion-label *ngIf="item.id === 'star'" class="ion-text-center">
+      <h4>{{item.descriptionHead}}</h4>
+      <p class="ion-padding-horizontal ion-text-center">{{item.description}}</p>
+    </ion-label>
+  </div>
+</ion-content>

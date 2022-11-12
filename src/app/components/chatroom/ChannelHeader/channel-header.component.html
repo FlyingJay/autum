@@ -1,0 +1,25 @@
+<ion-header style="background:transparent">
+<ion-toolbar>
+
+    <div no-padding no-margin style='position:sticky;float:left'>
+      <ion-img class="header-image" [src]="otherUser.profile_picture_url"></ion-img>
+    </div>
+
+  <ion-buttons slot="start" (click)="hideBack ? null : onQuit()">
+    <ion-icon slot="end" name="arrow-back-outline" color="autum-black" >
+    </ion-icon>
+  </ion-buttons>
+
+
+  <ion-title color="autum-black" class="ion-text-center" style="line-height30px;">
+    {{ otherUser.first_name | titlecase }}
+  </ion-title>
+
+  <ion-buttons slot="end" (click)="onEndConvo($event)" style="padding-right:10px;">
+    <ion-icon style="color:#f11f2b" slot="end" name="heart-dislike" class="endConvo">
+    </ion-icon>
+  </ion-buttons>
+
+</ion-toolbar>
+
+</ion-header>

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="privacy ion-padding-bottom">
+      <p class="dark ion-text-start">Login by email</p>
+        <ion-item>
+          <ion-input type="text" placeholder="Your email is" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="password" placeholder="Your password is" formControlName="password"></ion-input>
+        </ion-item>
+      <p class="medium ion-text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat a ipsum
+        deserunt. Voluptate iste earum beatae iusto aliquam odit distinctio voluptatem non deleniti veritatis? Quaerat
+        inventore totam impedit doloribus pariatur.</p>
+    </div>
+    <div class="buttonsDiv">
+      <ion-button expand="round" type="submit" color="light">send email
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

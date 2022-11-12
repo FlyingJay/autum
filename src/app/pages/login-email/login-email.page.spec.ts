@@ -1,0 +1,28 @@
+
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+
+import { LoginEmailPageComponent } from './login-email.page';
+
+describe('LoginEmailPageComponent', () => {
+  let component: LoginEmailPageComponent;
+  let fixture: ComponentFixture<LoginEmailPageComponent>;
+
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [LoginEmailPageComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    })
+      .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(LoginEmailPageComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

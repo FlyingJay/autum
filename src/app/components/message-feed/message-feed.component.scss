@@ -1,0 +1,131 @@
+.slide1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  // background: white;
+  .slidesIConText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    ion-icon {
+      font-size: 30px;
+    }
+
+    h1 {
+      font-weight: bold;
+    }
+  }
+
+  h2 {
+    font-weight: bold;
+  }
+
+  .footerbutton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+
+    ion-button.footerbutton1 {
+      --border-radius: 25px;
+      height: 48px;
+      width: 85%;
+      --background: var(--ion-color-dark-contrast);
+      --background-focused: var(--ion-color-warning-contrast);
+      --color: var(--ion-color-warning);
+      --color-activated: var(--ion-color-warning);
+      --color-focused: var(--ion-color-warning);
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    ion-button.footerbutton2 {
+      --border-radius: 25px;
+      height: 48px;
+      width: 85%;
+      font-weight: bold;
+      --background: var(--ion-color-warning-contrast);
+      --background-focused: var(--ion-color-warning-contrast);
+      --color: var(--ion-color-danger);
+      --color-activated: var(--ion-color-danger);
+      --color-focused: var(--ion-color-danger);
+      letter-spacing: 2px;
+    }
+  }
+}
+
+.like {
+  color: #26a69a;
+  width: 130px;
+  height: 50px;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 10%;
+  left: 14px;
+  transform: rotate(-37deg);
+  border-radius: 4px;
+  /* height: 170px; */
+  font-size: 40px;
+  font-family: sans-serif;
+  border: 5px solid #26a69a;
+  font-weight: bold;
+}
+
+.headerItem {
+  h3 {
+    font-weight: bold;
+    font-size: 14px;
+  }
+  p {
+    font-size: 12px;
+  }
+  ion-icon {
+    font-weight: bold;
+    font-size: 30px;
+  }
+}
+.feed-item {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+ion-card {
+  height: 360px;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  overflow: visible;
+  z-index: 1;
+}
+ion-item {
+  --inner-border-width: 0 0 0px 0;
+  ion-icon {
+    margin-top: 0;
+    margin-bottom: 23px;
+    -webkit-margin-end: 7px !important;
+    margin-inline-end: 7px !important;
+    font-size: 14px;
+    z-index: 0;
+  }
+  p {
+    margin-bottom: 0px;
+    font-size: 14px;
+  }
+}
+ion-fab {
+  bottom: -20px;
+  ion-fab-button {
+    width: 40px;
+    height: 40px;
+    --background: linear-gradient(to right, #d31027, #ff5722);
+  }
+}

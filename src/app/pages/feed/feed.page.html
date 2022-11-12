@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="danger"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Share My Feed</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="ion-padding-top">
+    <div *ngFor="let item of feedData;let i= index">
+      <ion-item>
+        <ion-text slot="start" class="ion-text-capitalize">{{item.head}}</ion-text>
+        <ion-toggle slot="end" color="danger"></ion-toggle>
+      </ion-item>
+      <ion-item *ngIf="item.para" class="paragraphItem">
+        <ion-label>
+          <p class="ion-text-wrap ion-padding-bottom">{{item.para}}</p>
+          <h3 class=" ion-text-capitalize">{{item.para2}}</h3>
+        </ion-label>
+      </ion-item>
+    </div>
+
+  </ion-list>
+</ion-content>

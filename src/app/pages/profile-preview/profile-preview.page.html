@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content scroll-y="false">
+  <div *ngIf="isLoading" class="nodataDiv ion-padding">
+    <ion-thumbnail slot="start" class="ovalIcon">
+      <img src="assets/images/logo.svg">
+    </ion-thumbnail>
+    <ion-spinner name="dots"></ion-spinner>
+    <ion-text class="dark ion-text-center" color="dark" style="font-size:20px;font-style:AutumFont!important;font-weight: bolder;">
+      Getting your profile..
+    </ion-text>
+  </div>
+
+  <div class="carousel">
+    <div app-profile-card
+         [profile]="user"
+         [user]="user"
+         class="card">       
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,30 @@
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+ion-card {
+    --background: white;
+    overflow: visible;
+
+    ion-item {
+        position: absolute;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        top: -15px;
+        right: -5px;
+        display: -webkit-inline-box;
+        ion-icon {
+            margin: auto;
+        }
+    }
+}
+.ios ion-card ion-item {
+    --padding-start: 9px;
+}
+ion-icon {
+    font-size: 25px;
+}

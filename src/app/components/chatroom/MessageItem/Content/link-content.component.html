@@ -1,0 +1,3 @@
+<div *ngIf="data" [style.background]="background" class="Text">
+    <a href="{{ data.text }}" target="_blank" (click)="$event.stopPropagation();">{{data.text}}</a>
+</div>

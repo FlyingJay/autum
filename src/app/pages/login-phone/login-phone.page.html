@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <div class="label_Class">
+    <h2 style="font-size:30px" class="dark ion-text-start!important">Enter your number</h2>
+  </div>
+
+  <ion-row class="content-background-color">
+    <ion-col size="4">
+      <ion-item mode="md">
+        <ion-select [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="IN+91" [(ngModel)]="selectedValue" mode="ios" disabled>
+          <!--
+          <ion-select-option *ngFor="let item of data" value={{item.dial_code}} selected>{{item.name}}</ion-select-option>
+          -->
+          <!-- JUST CANADA FOR NOW -->
+          <ion-select-option value="+1" selected>Canada</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+    <ion-col size="8">
+      <ion-item class="inputItem" mode="md">
+        <div color="medium" class="inputDiv">
+          <ion-text slot="start">{{selectedValue}}</ion-text>
+          <ion-input #phoneInput (keydown.enter)="gotoVerification()" type="tel" maxlength="10" class="item_input" [(ngModel)]="inputValue" clearInput autofocus>
+          </ion-input>
+        </div>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <div class="policyText ion-text-center">
+    <ion-text color="medium">
+      Tap Next to verify your account with Account. An SMS will be sent to verify your number.
+      Message and data rates may apply. A Canadian or American phone number is required at this time.
+    </ion-text>
+    <ion-button onclick="this.disabled = true" mode="md" expand="round" color="dark" class="buttonsDiv" (click)="gotoVerification()" [disabled]="inputValue == ''">
+      Next
+    </ion-button>
+  </div>
+</ion-content>

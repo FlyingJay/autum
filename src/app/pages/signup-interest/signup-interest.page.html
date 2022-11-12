@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+      <ion-title class="ion-text-uppercase">Sign up</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content class="content-background-color" >
+  <div class="ion-padding">
+    <div class="privacy ion-padding-bottom">
+      <p style="font-size:30px" class="dark ion-text-start ">Add some interests</p>
+      <p *ngIf="this.interests.length<6" style="font-size:12px"class="medium ion-text-start">Last step! <b>Add at least 3 interests.</b> These will be visible on your profile.</p>
+      <ion-list>
+        <ion-searchbar *ngIf="this.interests.length<6"
+            [(ngModel)]="searchText"
+            (ionFocus)="addFocus()"
+            (ionInput)="search()"
+            (ionBlur)="removeFocus()"
+            color="rgba(255, 255, 255, 1)!important"
+            placeholder="What do you do for fun"
+            inputmode="search"
+            animated="true"
+            debounce=100></ion-searchbar>
+
+        <!--
+        <ion-list>
+          <ion-item *ngFor="let interest of searchSuggestions" button (click)="add(interest)">
+            {{interest.name}}
+          </ion-item>
+        </ion-list>
+        -->
+        <div *ngIf="this.interests.length<6">
+          <ion-chip outline *ngFor="let interest of searchSuggestions" (click)="add(interest)" color="#fff" class="ion-chip">
+            {{ interest.name }}
+          </ion-chip>
+        </div>
+      </ion-list>
+      <div *ngIf="this.interests.length<6" style="border-top:1px solid #DDD;"></div>
+      <ion-list *ngIf="interests?.length > 0" style="padding-top:10px;margin-top:10px;">
+        <ion-chip outline *ngFor="let profileInterest of interests" (click)="remove(profileInterest)" color="#fff" class="ion-chip" style="margin-left:5px;">
+          {{ profileInterest.interest.name }}
+          <ion-icon name="close-outline" color="#fff"></ion-icon>
+        </ion-chip>
+      </ion-list>
+      <div *ngIf="this.interests?.length>=6" class="center-image2" style="padding:5px 10px;">
+        <ion-text>
+
+          <p>You’ve reached your limit for interests. Don’t worry, you can make changes or remove them at any time</p>.</ion-text>
+      </div>
+
+      <div style="min-height:80px"></div>
+    </div>
+
+    <div style="position:static" class="buttonsDiv">
+      <ion-button (click)="validateAndContinue()" expand="round" type="submit" color="dark" [disabled]="this.interests?.length < 3">
+        Next
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

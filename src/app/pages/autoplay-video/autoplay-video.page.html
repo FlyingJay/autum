@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="danger"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Autoplay videos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="ion-padding-top">
+    <ion-item class="paragraphItem">
+      <ion-label>
+        <p class="specialPara ion-text-wrap ion-padding-bottom">{{videoData.intro}}</p>
+        <h3 class="ion-text-capitalize">{{videoData.listHeader}}</h3>
+      </ion-label>
+    </ion-item>
+    <ion-radio-group>
+      <ion-item *ngFor="let item of videoData.listItems;let i= index">
+        <ion-text slot="start" class="ion-text-capitalize">{{item.head}}</ion-text>
+        <ion-radio slot="end" color="danger" [value]="item.head"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+
+  </ion-list>
+</ion-content>

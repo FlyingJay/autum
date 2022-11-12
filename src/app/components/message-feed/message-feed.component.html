@@ -1,0 +1,28 @@
+<ion-list>
+  <div *ngFor="let data of feedData; let i = index; " class="feed-item">
+    <ion-item class="headerItem">
+      <ion-avatar slot="start">
+        <ion-img [src]="data.person_1_image"></ion-img>
+      </ion-avatar>
+      <ion-label>
+        <h3>{{data.person_1_name}}</h3>
+        <p>New Match with {{data.person_2_name}}</p>
+      </ion-label>
+      <ion-icon name="more" mode="ios" slot="end" expand="icon-only" (click)="openPopover($event)"></ion-icon>
+    </ion-item>
+    <ion-card [ngStyle]="{'background':'url('+ data.person_2_image  +')','background-size':'cover'}">
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+          <ion-icon name="chatbubbles"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </ion-card>
+    <ion-item>
+      <ion-icon name="pin" slot="start"></ion-icon>
+      <ion-label>
+        <p>{{data.distance}}</p>
+        <p>{{data.date}}</p>
+      </ion-label>
+    </ion-item>
+  </div>
+</ion-list>

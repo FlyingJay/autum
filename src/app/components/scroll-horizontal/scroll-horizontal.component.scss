@@ -1,0 +1,10 @@
+
+.scrolling-wrapper {
+  overflow-x: scroll;
+  white-space: nowrap;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+

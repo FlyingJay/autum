@@ -1,0 +1,36 @@
+<ion-content>
+  <div class="content">
+    <ion-icon name="arrow-up" mode="ios" (click)="toggleContentClose()" class="dropDown"></ion-icon>
+
+
+    <ion-item>
+      <div class="buttonsDiv">
+        <ion-button mode="md" class="ion-text-uppercase" expand="round" class="facebook" (click)="toggleContentClose()">
+          <small>Login
+            in with Facebook</small> </ion-button>
+        <ion-button mode="md" class="ion-text-uppercase" expand="round" color="medium" fill="outline"
+          (click)="loginWithPhone()">
+          <small>login in with phone
+            number</small>
+        </ion-button>
+        <p class="medium ion-text-center ion-margin-bottom" (click)="gotAccountRecovery()"><small><u>Trouble Logging
+              In?</u></small></p>
+      </div>
+    </ion-item>
+
+
+    <div class="center">
+      <div class="privacy ion-padding-bottom">
+        <p class="dark ion-text-center">We take your privacy Seriously</p>
+        <ion-text class="ion-text-center" color="medium">We don't post anything to Facebook</ion-text>
+      </div>
+
+      <div class="paddingHorizontal ion-text-center ion-padding-horizontal">
+        <ion-text color="medium">Other user's cannot contact you unless you've already been matched</ion-text>
+      </div>
+    </div>
+
+
+  </div>
+
+</ion-content>

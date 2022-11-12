@@ -1,0 +1,33 @@
+<ion-content scroll-y="false">
+  <div class="content" (click)='closeModal()'>
+    <ion-card>
+      <div class="avatarAbs">
+        <ion-icon color="autum-red"style="font-size:40px" name="heart-dislike"></ion-icon>
+      </div>
+      <ion-item>
+        <ion-label>
+          <h2 class="ion-text-center">End</h2>
+          <p class="ion-text-wrap ion-text-center">To give you a better experience, what's the reason for ending the convo?</p>
+        </ion-label>
+      </ion-item>
+      <ion-list>
+        <ion-item class="reportItem" (click)="endConvo(1); $event.stopPropagation();">
+          <ion-icon slot="start" name="flask-outline" color="autum-red"></ion-icon>
+          <h6>No Chemistry</h6>
+        </ion-item>
+        <ion-item  class="reportItem" (click)="endConvo(2); $event.stopPropagation();">
+          <ion-icon slot="start" name="snow-outline" color="autum-yellow"></ion-icon>
+          <h6>Unresponsive</h6>
+        </ion-item>
+        <ion-item  class="reportItem" (click)="endConvo(3); $event.stopPropagation();">
+          <ion-icon slot="start" name="leaf-outline" color="autum-purple"></ion-icon>
+          <h6>Met someone else</h6>
+        </ion-item>
+        <ion-item  class="reportItem" (click)="endConvo(4); $event.stopPropagation();">
+          <ion-icon slot="start" name="sad-outline" color="autum-orange"></ion-icon>
+          <h6>Accident/Other</h6>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  </div>
+</ion-content>

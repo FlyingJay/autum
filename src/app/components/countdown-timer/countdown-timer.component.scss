@@ -1,0 +1,22 @@
+.wrapper {
+  max-width: 300px;
+  margin: 0 auto;
+  font: normal 14px 'AutumFont-light';
+  .targe-date {
+    text-align: center;
+  }
+  .description,
+  .times {
+    display: flex;
+    > p {
+      width: 100%;
+
+      margin: 12px 4px 1px 11px;
+      text-align: initial;
+      font-family:'AutumFont-light'
+    }
+  }
+  .times {
+    font-size: 22px;
+  }
+}

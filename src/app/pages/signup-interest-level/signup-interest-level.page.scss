@@ -1,0 +1,54 @@
+
+.privacy,
+.paddingHorizontal {
+  ion-text {
+    font-size: 12px;
+  }
+}
+.privacy {
+  p.dark {
+    font-weight: bolder;
+    color: var(--ion-color-dark-shade);
+    letter-spacing: 2px;
+    font-size: 20px;
+  }
+  p.medium {
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    color: gray;
+    margin-top: 5px;
+  }
+
+ .item-background-color{
+
+ }
+
+ .item .item-content {
+   background-color: transparent !important;
+ }
+
+  ion-list {
+    background-color: transparent !important;
+  }
+
+
+}
+.buttonsDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 40px;
+  ion-button {
+    max-width: 250px;
+    min-width: 220px;
+    width: 250px;
+    height: 36px;
+    //   --background: linear-gradient(to right, rgb(233, 30, 99), rgb(255, 138, 101));
+    //   --background-focused: linear-gradient(to right, rgb(233, 30, 99), rgb(255, 138, 101));
+  }
+  p {
+    margin-top: 0;
+    margin-bottom: 26px;
+  }
+}

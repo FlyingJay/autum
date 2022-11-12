@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark"></ion-back-button>
+      <ion-title class="ion-text-uppercase">Sign up</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content-background-color">
+  <div style="position:absolute;top:10px;right:10px;">
+    <ion-text (click)="skip()" style="font-size:20px;" color="medium">SKIP</ion-text>
+  </div>
+  <div style="min-height:40px"class="ion-padding">
+    <div class="privacy ion-padding-bottom">
+      <p style="font-size:30px" class="dark ion-text-start ">Studied at...</p>
+      <p style="font-size:12px"class="medium ion-text-start">Adding your school is a great way to meet people near you.</p>
+      <ion-list style="min-height:80px">
+        <ion-searchbar
+           [(ngModel)]="searchText"
+           (ionFocus)="addFocus()"
+           (ionInput)="search()"
+           (ionBlur)="removeFocus()"
+           color="rgba(255, 255, 255, 1)!important"
+           placeholder="Find a school.."
+           inputmode="search"
+           animated="true"
+           debounce=100>
+        </ion-searchbar>
+
+        <ion-chip *ngFor="let school of searchSuggestions" (click)="add(school)" class="ion-chip">
+          {{ school.name }}
+        </ion-chip>
+      </ion-list>
+
+      <ion-list style="text-align:center;">
+        <ion-chip *ngIf="school" (click)="remove()" class="ion-chip">
+          {{ school_name }}&nbsp;
+          <ion-icon name="close-outline" color="autum-red"></ion-icon>
+        </ion-chip>
+      </ion-list>
+      <div style="min-height:80px"></div>
+    </div>
+
+    <div style="position:sticky;" class="buttonsDiv">
+      <ion-button (click)="validateAndContinue()" expand="round" type="submit" color="dark">
+        Next
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

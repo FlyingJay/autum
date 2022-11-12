@@ -1,0 +1,193 @@
+<ion-header mode="md" class="iosMargin">
+  <div *ngIf="!networkStatus" style="position:absolute;top:50px;right:0;text-align:center;width:100%;">
+    <div style="background:var(--ion-color-autum-red);color:#fff;border-radius:20px;padding:5px 10px;font-weight:200;display:inline-block;">
+      No internet connection!
+    </div>
+  </div>
+</ion-header>
+
+<ion-content ng-cloak *ngIf="segmentButton === 'flame'" scroll-y="false" has-bouncing="false">
+  <!--Card Page For Deck Hidden-->
+  <div style="background:#ffff" *ngIf="!isLoading && user?.remaining_likes_count > 0 && user?.is_hidden" class="nodataDiv ion-padding">
+    <ion-thumbnail style="border-radius:0px!important" slot="start" class="ovalIcon">
+      <img src="assets/images/logo.svg">
+    </ion-thumbnail>
+    <ion-text class="dark ion-text-center" color="dark" style="font-size:24px;font-family:AutumFont-light;font-weight:bolder;">
+      Your Autum profile is hidden.
+    </ion-text>
+    <ion-text class="ion-text-center" color="dark" style="font-size:16px;font-family:AutumFont-light;margin-top:100px;font-weight:bold;">
+      Unhide your profile to match!
+    </ion-text>
+    <ion-button (click)="updateSegmentButton('settings')"  style="text-transform:inherit;font-weight:normal;width:180px;margin-top:20px;background:#FFF;" shape="round" color="autum-red">
+      Change Settings
+    </ion-button>
+  </div>
+  <!--Card Page For End Of Deck-->
+  <div style="background:#ffff" *ngIf="!isLoading && !cards.length && user?.remaining_likes_count > 0 || cards.length-1 == currentSlide" class="nodataDiv ion-padding">
+    <ion-thumbnail style="border-radius:0px!important" slot="start" class="ovalIcon">
+      <img src="assets/images/logo.svg">
+    </ion-thumbnail>
+    <ion-spinner name="dots"></ion-spinner>
+    <ion-text class="dark ion-text-center" color="dark" style="font-size:24px;font-family:AutumFont-light;font-weight:bolder;">
+      People sign up on Autum every day. Check back tomorrow!
+    </ion-text>
+    <ion-text class="ion-text-center" color="dark" style="font-size:16px;font-family:AutumFont-light;margin-top:100px;font-weight:bold;">
+      Second thoughts on your left swipes?
+    </ion-text>
+    <ion-button (click)="resetLikes()"  style="text-transform:inherit;font-weight:normal;width:180px;margin-top:20px;background:#FFF;" shape="round" color="autum-red">
+      Have Another Look
+    </ion-button>
+  </div>
+  <!--Card Page For Matches are FULL-->
+  <div *ngIf="!isLoading && likes && user?.remaining_likes_count < 1" ng-cloak class="ng-cloak">
+    <ion-card class=" ng-cloak matchCard">
+      <img ng-cloak class="center-image" src="assets/images/autum/blackTextRedLeaf.svg">
+      <br/>
+      <img ng-cloak style="margin-top:-100px;" class="ng-cloak center-image2" src='../../assets/images/heart.svg'>
+      <div class="center-flex ">
+        <ion-header class="center-flex" style="color:#37393E;margin-top:-50px;text-align:center">
+          <h6 ng-cloak>Hey {{this.user?.first_name | titlecase}}!</h6>
+          <h6 ng-cloak  style="margin-inline:5px">{{ likeOther(likes[0]).first_name | titlecase }}, {{ likeOther(likes[1]).first_name | titlecase }}, and {{ likeOther(likes[2]).first_name | titlecase }} want to get to know you. {{ verb }}</h6>
+        </ion-header>
+        <ion-button (click)="updateSegmentButton('chatbubbles')"  style="text-transform:inherit;font-weight:normal;width:140px;margin-top:100px;background:#FFF;" shape="round" color="autum-red">
+          Send a Message
+        </ion-button>
+      </div>
+    </ion-card>
+  </div>
+  <!--Card Page For Location OUT OF BOUNDS-->
+  <div *ngIf="!isLoading && user?.hide_swipedeck" class="ng-cloak">
+    <ion-card class=" ng-cloak matchCard">
+      <img ng-cloak class="center-image" src="assets/images/autum/blackTextRedLeaf.svg">
+      <br/>
+      <img ng-cloak style="margin-top:-100px;" class="ng-cloak center-image2" src='../../assets/images/heart.svg'>
+      <div class="center-flex ">
+        <ion-header class="center-flex" style="color:#37393E;margin-top:-50px;text-align:center">
+          <h6 ng-cloak> Hey {{this.user?.first_name | titlecase}}!</h6>
+          <h6 ng-cloak style="margin-inline:5px">We're not available in your area yet. You're on the waiting list for Autum. We'll notify you once we launch in your area.</h6>
+        </ion-header>
+        <ion-button onclick="window.location.href='https://www.instagram.com/autumapp';" style="text-transform:inherit;font-weight:normal;margin-top:100px;background:#FFF;" shape="round" color="autum-red">
+          Follow us on Instagram
+        </ion-button>
+      </div>
+    </ion-card>
+  </div>
+  <!--Cards loading-->
+  <div style="background:#ffff" *ngIf="isLoading" class="nodataDiv ion-padding ng-cloak">
+    <ion-thumbnail style="border-radius:0px!important" slot="start" class="ovalIcon">
+      <img src="assets/images/logo.svg">
+    </ion-thumbnail>
+    <ion-spinner name="dots"></ion-spinner>
+    <ion-text class="ion-text-center" color="dark" style="font-size:24px;font-family:AutumFont-light;font-weight:bolder;">
+      Finding a date!
+    </ion-text>
+    <ion-text class="ion-text-center" color="dark" style="font-size:18px;font-family:AutumFont-light;font-weight:bolder;">
+      Please wait a moment..
+    </ion-text>
+    <ion-button *ngIf="!networkStatus" (click)="refreshNetwork()" style="font-weight:normal;text-transform:inherit;width:122px;margin-top:50px;background:#FFF;" shape="round" color="autum-red">
+      <div *ngIf="loaderButton">
+        <ion-spinner name="crescent"></ion-spinner>
+      </div>
+      <div *ngIf="!loaderButton">Reconnect</div>
+    </ion-button>
+  </div>
+
+  <!--Profile Stack-->
+  <div class="carousel" *ngIf="!user?.hide_swipedeck && user?.remaining_likes_count > 0">
+    <ng-container *ngFor="let profile of cards; let i = index">
+      <div app-profile-card
+        *ngIf="i === currentSlide"
+        [profile]="profile"
+        [user]="user"
+        [isTutorial]="isCardTutorial"
+        [@slideAnimation]="stackAnimation"
+        (onTutorialComplete)="tutorialComplete()"
+        (onReportUser)="onReportUser($event)"
+        (onLike)="nextCard()"
+        (onPass)="nextCard(true)"
+        class="slide card"
+        data-id="{{ profile?.id }}">
+      </div>
+      <!--
+      <img *ngIf="i === currentSlide"
+              [src]="slide.src"
+              class="slide"
+              [@slideAnimation]="animationType"/>
+      -->
+    </ng-container>
+  </div>
+
+  <!--
+  <div class="animition-type-selector">
+    <div class="title">Let's Play! 😎</div>
+    <div *ngFor="let type of animationTypes"
+         class="button"
+         (click)="setAnimationType(type)"
+         [class.active]="animationType === type.value">
+      {{ type.name }}
+    </div>
+  </div>
+  -->
+
+  <!--
+  <div *ngIf="!user?.hide_swipedeck && user?.remaining_likes_count > 0" [ngClass]="isAndroid ? 'fadeIn stack' : 'fade-in stack'" style="opacity:{{isLoading ? 0 : 1}}">
+    <div app-profile-card #swingCards *ngFor="let profile of cardsRendered; let i = index"
+         [profile]="profile"
+         [is_like]="like && i === cardsRendered?.length -1"
+         [is_dislike]="disLike && i === cardsRendered?.length -1"
+         [is_dragging]="isDragging"
+         [user]="user"
+         [is_top]="i === cardsRendered?.length -1"
+         (onCardFlip)="onCardFlip($event)"
+         (onReportUser)="onReportUser($event)"
+         class="card"
+         data-id="{{ profile?.id }}"
+         style="z-index:{{i}};">
+    </div>
+  </div>
+  -->
+</ion-content>
+<ion-content *ngIf="segmentButton === 'chatbubbles'" #IonContent scroll-y="false">
+  <app-chat [user]="user" (navigateToDeck)="updateSegmentButton('flame')" (navigateToEdit)="updateSegmentButton('person')"></app-chat>
+</ion-content>
+<ion-content *ngIf="segmentButton === 'person'" #IonContent>
+  <app-edit [user]="user" (refreshUser)="loadData()"></app-edit>
+</ion-content>
+<ion-content *ngIf="segmentButton === 'settings'" has-bouncing="false" #IonContent>
+  <app-settings [user]="user" (refreshUser)="loadData()" (navigateToDeck)="updateSegmentButton('flame')"></app-settings>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar mode="md">
+    <ion-segment [value]="segmentButton" class="iosMarginBottom">
+      <ion-segment-button (click)="updateSegmentButton('flame')" mode="md" [disabled]="isLoading">
+        <!--<ion-icon color="dark" name="leaf"></ion-icon>-->
+        <ng-lottie
+          width="50px"
+          height="50px"
+          style="position:absolute;top:0;left:5px;"
+          [options]="leafIconOptions"
+          (animationCreated)="leafIconAnimated($event)">
+        </ng-lottie>
+      </ion-segment-button>
+      <ion-segment-button (click)="updateSegmentButton('chatbubbles')" mode="md" [disabled]="isLoading">
+        <ion-icon color="dark" name="chatbox"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button (click)="updateSegmentButton('person')" mode="md" [disabled]="isLoading">
+        <ion-icon color="dark" name="person"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button (click)="updateSegmentButton('settings')" mode="md" [disabled]="isLoading">
+        <ion-icon color="dark" name="settings"></ion-icon>
+<!--    
+        <ng-lottie
+          width="70px"
+          height="70px"
+          style="position:absolute;top:-10px;left:-5px;"
+          [options]="settingsIconOptions"
+          (animationCreated)="settingsIconAnimated($event)">
+        </ng-lottie> 
+-->
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>
